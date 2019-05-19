@@ -8,21 +8,32 @@ import json
 
 _CENSUS_CSV = 'data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv'
 _OUTPUT_CSV = './cities_comparison.csv'
-_CENSUS_HEADERS_KEPT = ['April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017']
+_CENSUS_HEADERS_KEPT = [
+    'April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017'
+]
 _FBI_HEADERS_KEPT = ['Murder']
 
+
 def get_fbi_dict_constant():
+  """ Load the fbi crime data dictionary file made by xls2json.py. """
   with open('data/fbi.gov/fbi_cities_crime_2017.json', 'r') as filehandler:
     return json.loads(filehandler.read())
 
+
 def get_kept_headers(headers_kept, city):
+  """
+    This is a helper method to only keep the column headers from
+    census or fbi data that you want.
+  """
   row = collections.OrderedDict()
   for column_header in city:
     if column_header in headers_kept:
       row[column_header] = str(city[column_header])
   return row
 
+
 def get_cleaned_census_row(city):
+  """ This method returns only the column headers you want for census. """
   # Split the "city, state" name into two fields.
   row = collections.OrderedDict()
   row['city'], row['state'] = city['Geography'].lower().split(', ')
@@ -30,38 +41,50 @@ def get_cleaned_census_row(city):
 
   return {**row, **get_kept_headers(_CENSUS_HEADERS_KEPT, city)}
 
+
 def get_city_population_from_row(row):
+  """ Get the 2017 population integer """
   return int(dict(row)['Population Estimate (as of July 1) - 2017'])
 
+
 def get_city_name(row):
+  """ Get the city name from the row dictionary """
   return dict(row)['city']
 
+
 def get_fbi_row_on_city(city, fbi_dict):
+  """
+    Logic to get the fbi crime states for each city row.
+    It's tricky since the population qty or city name
+    do not always match. This is a best effort to find the match
+  """
   census_population = get_city_population_from_row(city)
   city_name = get_city_name(city)
   # note, if cities have the same population size, there will be a collision
   if census_population in fbi_dict:
-    return get_kept_headers(_FBI_HEADERS_KEPT, fbi_dict[city_name]['csv_dict_row'])
-  elif city_name in fbi_dict:
+    return get_kept_headers(_FBI_HEADERS_KEPT,
+                            fbi_dict[city_name]['csv_dict_row'])
+
+  if city_name in fbi_dict:
     fbi_population = fbi_dict[city_name]['population']
     population_discrepancy = abs(fbi_population - census_population)
     # if the city name matches, and the population is within 2 percent
     # I assume it's the same city.
     if population_discrepancy / census_population < 0.02:
-      return get_kept_headers(_FBI_HEADERS_KEPT, fbi_dict[city_name]['csv_dict_row'])
-    print('{} city population discrepenacy between fbi and census is too high'.format(city_name))
+      return get_kept_headers(_FBI_HEADERS_KEPT,
+                              fbi_dict[city_name]['csv_dict_row'])
+    print('{} city population discrepenacy between fbi and census is too high'.
+          format(city_name))
   print('city not found in census data: {}'.format(city_name))
   row = collections.OrderedDict()
   for header in _FBI_HEADERS_KEPT:
     row[header] = ''
   return row
 
+
 def get_aggregated_csv_data():
   """
-  Fetch all cities from census data,
-
-  Returns:
-    List of cities (dictionaries).
+  Compile the headers you want from census and fbi and combine them into one csv.
   """
   all_cities = []
   fbi_dict = get_fbi_dict_constant()
