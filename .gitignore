@@ -1,4 +1,4 @@
 py3*-mac
 .DS_Store
-.*.csv
-output.csv
+.*.csv?
+cities_comparison.csv
