@@ -21,6 +21,13 @@ def get_cleaned_census_row(city):
 
   return row
 
+def get_city_population_from_row(row):
+    return dict(row)['Population Estimate (as of July 1) - 2017']
+
+def get_fbi_row_on_city(city):
+    city_population_2017 = get_city_population_from_row(city)
+    import ipdb; ipdb.set_trace()
+
 def get_aggregated_csv_data():
   """
   Fetch all cities from census data,
@@ -35,7 +42,9 @@ def get_aggregated_csv_data():
     next(csv_file)
     reader = csv.DictReader(csv_file, delimiter=',', quotechar='"')
     for city in reader:
+      # clean up census csv, only keep the columns from: _CENSUS_HEADERS_KEPT
       all_cities.append(get_cleaned_census_row(city))
+      all_cities.append(get_fbi_row_on_city(city))
   return all_cities
 
 
