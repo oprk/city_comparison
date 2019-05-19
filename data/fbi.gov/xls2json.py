@@ -33,13 +33,17 @@ def convert_xls_to_json(xls_file):
         csv_dict_row[column_headers[index]] = cell_value
 
       fbi_dict[int(row_values[3])] = {
-        'city': row_values[1].lower(),
         'csv_dict_row': csv_dict_row
+      }
+      fbi_dict[row_values[1].lower()] = {
+        'csv_dict_row': csv_dict_row,
+        'population': int(row_values[3]),
       }
     sheet_0.row_values(rownum)
 
-  with open('fbi_cities_crim_2017.json', 'w') as fp:
+  with open('fbi_cities_crime_2017.json', 'w') as fp:
     json.dump(fbi_dict, fp)
+
 
 
 convert_xls_to_json('Table_4_January_to_June_2018_Offenses_Reported_to_Law_Enforcement_by_State_by_City_100,000_and_Over_in_Population.xls')
