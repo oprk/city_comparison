@@ -1,0 +1,12 @@
+language: python
+cache: pip
+python:
+  - "3.6"
+install:
+  - pip install -r requirements-dev.txt
+# commands to run, must exit 0 to pass
+script:
+  # test and validate all backend files
+  - flake8
+  - yapf --parallel --verbose --recursive --style .style.yapf --diff .
+  - pylint --max-line-length=120 *.py
