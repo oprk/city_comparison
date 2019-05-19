@@ -11,7 +11,7 @@ _OUTPUT_CSV = './cities_comparison.csv'
 _CENSUS_HEADERS_KEPT = [
     'April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017'
 ]
-_FBI_HEADERS_KEPT = ['Murder']
+_FBI_HEADERS_KEPT = ['Murder', 'Violent crime', 'Property crime']
 
 
 def get_fbi_dict_constant():
