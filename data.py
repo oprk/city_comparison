@@ -2,13 +2,26 @@
 Read in raw census CSV data and write out processed (modified) CSV data.
 """
 
+import collections
 import csv
 
 _CENSUS_CSV = 'data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv'
-_OUTPUT_CSV = './output.csv'
+_OUTPUT_CSV = './cities_comparison.csv'
+_CENSUS_HEADERS_KEPT = ['April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017']
 
 
-def fetch_census_data():
+def get_cleaned_census_row(city):
+  # Split the "city, state" name into two fields.
+  row = collections.OrderedDict()
+  row['city'], row['state'] = city['Geography'].split(', ')
+
+  for column_header in city:
+      if column_header in _CENSUS_HEADERS_KEPT:
+          row[column_header] = city[column_header]
+
+  return row
+
+def get_aggregated_csv_data():
   """
   Fetch all cities from census data,
 
@@ -22,9 +35,7 @@ def fetch_census_data():
     next(csv_file)
     reader = csv.DictReader(csv_file, delimiter=',', quotechar='"')
     for city in reader:
-      # Split the "city, state" name into two fields.
-      city['city'], city['state'] = city['Geography'].split(', ')
-      all_cities.append(city)
+      all_cities.append(get_cleaned_census_row(city))
   return all_cities
 
 
@@ -53,7 +64,7 @@ def main():
   Read in raw census CSV data and write out processed (modified) CSV data.
   """
 
-  all_cities = fetch_census_data()
+  all_cities = get_aggregated_csv_data()
   # Check that we successfully fetched the city data.
   assert all_cities
   # Write CSV with "city, state" separated into two fields.
