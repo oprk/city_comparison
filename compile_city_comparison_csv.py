@@ -63,7 +63,7 @@ def get_fbi_row_on_city(city, fbi_dict):
   # note, if cities have the same population size, there will be a collision
   if census_population in fbi_dict:
     return get_kept_headers(_FBI_HEADERS_KEPT,
-                            fbi_dict[city_name]['csv_dict_row'])
+                            fbi_dict[city_name]['xls_dict_row'])
 
   if city_name in fbi_dict:
     fbi_population = fbi_dict[city_name]['population']
@@ -72,7 +72,7 @@ def get_fbi_row_on_city(city, fbi_dict):
     # I assume it's the same city.
     if population_discrepancy / census_population < 0.02:
       return get_kept_headers(_FBI_HEADERS_KEPT,
-                              fbi_dict[city_name]['csv_dict_row'])
+                              fbi_dict[city_name]['xls_dict_row'])
     print('{} city population discrepenacy between fbi and census is too high'.
           format(city_name))
   print('city not found in census data: {}'.format(city_name))

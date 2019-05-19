@@ -33,8 +33,10 @@ def convert_xls_to_json(xls_file):
       for index, cell_value in enumerate(row_values):
         xls_dict_row[column_headers[index]] = cell_value
 
+      city_name = row_values[1].lower()
+      city_name = ''.join([char for char in city_name if not char.isdigit()])
       FBI_DICT[int(row_values[3])] = {'xls_dict_row': xls_dict_row}
-      FBI_DICT[row_values[1].lower()] = {
+      FBI_DICT[city_name] = {
           'xls_dict_row': xls_dict_row,
           'population': int(row_values[3]),
       }

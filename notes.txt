@@ -1,0 +1,5 @@
+# 2019-05-18
+  - Got FBI data merged.
+  - 630 cities don't have FBI crime data shown.
+# 2019-05-19
+  - Stripped integers out of FBI city names, 624 cities not found now.
