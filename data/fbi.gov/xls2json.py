@@ -25,7 +25,7 @@ def convert_xls_to_json(xls_file):
     row_values = sheet_0.row_values(rownum)
     # save the header information
     if rownum == 3:
-      headers = [x.replace('\n', '') for x in row_values]
+      headers = [x.replace('\n', ' ') for x in row_values]
       column_headers = headers
     # if the population float or int is there, save that row to the dictionary
     if isinstance(row_values[2], float):
