@@ -51,7 +51,10 @@ def get_city_population_from_row(row):
 def get_state_city_name(row):
   """ Get the city name from the row dictionary """
   dict_row = dict(row)
-  return '{}_{}'.format(dict_row['state'], dict_row['city'])
+  city_name = dict_row['city'].lower()
+  if city_name.endswith(' town'):
+    city_name = city_name[:-5]
+  return '{}_{}'.format(dict_row['state'], city_name)
 
 
 def get_fbi_row_on_city(city, fbi_dict):
@@ -78,7 +81,6 @@ def get_fbi_row_on_city(city, fbi_dict):
     print('{} city population discrepenacy between fbi and census is too high'.
           format(state_city_name))
     return get_empty_row()
-
   print('city not found in census data: {}'.format(state_city_name))
   return get_empty_row()
 

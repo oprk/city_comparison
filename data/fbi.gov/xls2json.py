@@ -35,6 +35,7 @@ def convert_xls_to_json(xls_file):
 
       if rownum > 3 and row_values[0] != '':
         state_name = row_values[0].lower()
+        state_name = ''.join([char for char in state_name if not char.isdigit()])
       city_name = row_values[1].lower()
       city_name = ''.join([char for char in city_name if not char.isdigit()])
       # FBI_DICT[int(row_values[2])] = {'xls_dict_row': xls_dict_row}
