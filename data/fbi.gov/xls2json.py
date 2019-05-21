@@ -9,6 +9,22 @@ import xlrd
 
 FBI_DICT = {}
 
+STATES_CITIES_DICT = {}
+
+
+def add_city_to_dict(city_name, state_name):
+  if state_name not in STATES_CITIES_DICT:
+    STATES_CITIES_DICT[state_name] = []
+  STATES_CITIES_DICT[state_name].append(city_name)
+
+
+def write_json_files():
+  with open('fbi_cities_crime_2017.json', 'w') as file_handler:
+    json.dump(FBI_DICT, file_handler)
+
+  with open('fbi_states_cities.json', 'w') as file_handler:
+    json.dump(STATES_CITIES_DICT, file_handler)
+
 
 def convert_xls_to_json(xls_file):
   """ Convert one xls file to json """
@@ -44,11 +60,8 @@ def convert_xls_to_json(xls_file):
           'xls_dict_row': xls_dict_row,
           'population': int(row_values[2]),
       }
-    sheet_0.row_values(rownum)
-
-  with open('fbi_cities_crime_2017.json', 'w') as file_handler:
-    json.dump(FBI_DICT, file_handler)
-
+      add_city_to_dict(city_name, state_name)
+  write_json_files()
 
 convert_xls_to_json(
     'Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
