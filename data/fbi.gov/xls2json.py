@@ -51,7 +51,8 @@ def convert_xls_to_json(xls_file):
 
       if rownum > 3 and row_values[0] != '':
         state_name = row_values[0].lower()
-        state_name = ''.join([char for char in state_name if not char.isdigit()])
+        state_name = ''.join(
+            [char for char in state_name if not char.isdigit()])
       city_name = row_values[1].lower()
       city_name = ''.join([char for char in city_name if not char.isdigit()])
       # FBI_DICT[int(row_values[2])] = {'xls_dict_row': xls_dict_row}
@@ -63,6 +64,6 @@ def convert_xls_to_json(xls_file):
       add_city_to_dict(city_name, state_name)
   write_json_files()
 
+
 convert_xls_to_json(
-    'Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
-)
+    'Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls')

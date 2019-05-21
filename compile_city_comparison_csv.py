@@ -11,7 +11,9 @@ _OUTPUT_CSV = './cities_comparison.csv'
 _CENSUS_HEADERS_KEPT = [
     'April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017'
 ]
-_FBI_HEADERS_KEPT = ['Murder and nonnegligent manslaughter', 'Violent crime', 'Property crime']
+_FBI_HEADERS_KEPT = [
+    'Murder and nonnegligent manslaughter', 'Violent crime', 'Property crime'
+]
 
 
 def get_fbi_dict_constant():
@@ -38,7 +40,7 @@ def get_cleaned_census_row(city):
   row = collections.OrderedDict()
   row['city'], row['state'] = city['Geography'].lower().split(', ')
   if row['city'].endswith(' city'):
-      row['city'] = row['city'][:-5]
+    row['city'] = row['city'][:-5]
 
   return {**row, **get_kept_headers(_CENSUS_HEADERS_KEPT, city)}
 
@@ -63,11 +65,13 @@ def get_fbi_row_on_city(city, fbi_dict):
     It's tricky since the population qty or city name
     do not always match. This is a best effort to find the match
   """
+
   def get_empty_row():
     row = collections.OrderedDict()
     for header in _FBI_HEADERS_KEPT:
       row[header] = ''
     return row
+
   census_population = get_city_population_from_row(city)
   state_city_name = get_state_city_name(city)
   if state_city_name in fbi_dict:
@@ -83,7 +87,6 @@ def get_fbi_row_on_city(city, fbi_dict):
     return get_empty_row()
   print('city not found in census data: {}'.format(state_city_name))
   return get_empty_row()
-
 
 
 def get_aggregated_csv_data():
