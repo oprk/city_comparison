@@ -26,6 +26,13 @@ def get_kept_headers(headers_kept, city):
   """
     This is a helper method to only keep the column headers from
     census or fbi data that you want.
+
+    Args:
+      headers_kept: collection of string headers.
+      city: dictionary where keys are headers.
+
+    Returns:
+     Ordered dictionary where keys are in `headers_kept`.
   """
   row = collections.OrderedDict()
   for column_header in city:
@@ -34,19 +41,24 @@ def get_kept_headers(headers_kept, city):
   return row
 
 
-def get_cleaned_census_row(city):
+def get_census_row(city):
   """ This method returns only the column headers you want for census. """
   # Split the "city, state" name into two fields.
   row = collections.OrderedDict()
   row['city'], row['state'] = city['Geography'].lower().split(', ')
+  # The Census data city names often end with 'city', such as 'New York City
+  # City', even when it's redundant.  The FBI data doesn't append 'city' in this
+  # way, so let's strip ' city' off the end.
   if row['city'].endswith(' city'):
     row['city'] = row['city'][:-5]
 
   return {**row, **get_kept_headers(_CENSUS_HEADERS_KEPT, city)}
 
 
-def get_city_population_from_row(row):
+def get_city_population_from_census_row(row):
   """ Get the 2017 population integer """
+  # 'Population Estimate (as of July 1) - 2017' is a header from the Census
+  # table.
   return int(dict(row)['Population Estimate (as of July 1) - 2017'])
 
 
@@ -54,6 +66,8 @@ def get_state_city_name(row):
   """ Get the city name from the row dictionary """
   dict_row = dict(row)
   city_name = dict_row['city'].lower()
+  # Strip off ' town', because FBI and Census data don't always agree on whether
+  # to end with ' town' or not.
   if city_name.endswith(' town'):
     city_name = city_name[:-5]
   return '{}_{}'.format(dict_row['state'], city_name)
@@ -72,7 +86,7 @@ def get_fbi_row_on_city(city, fbi_dict):
       row[header] = ''
     return row
 
-  census_population = get_city_population_from_row(city)
+  census_population = get_city_population_from_census_row(city)
   state_city_name = get_state_city_name(city)
   if state_city_name in fbi_dict:
     fbi_population = fbi_dict[state_city_name]['population']
@@ -102,7 +116,7 @@ def get_aggregated_csv_data():
     reader = csv.DictReader(csv_file, delimiter=',', quotechar='"')
     for city in reader:
       # clean up census csv, only keep the columns from: _CENSUS_HEADERS_KEPT
-      cleaned_census_row = get_cleaned_census_row(city)
+      cleaned_census_row = get_census_row(city)
       # add the FBI crime data to the row for the city when available
       fbi_row_on_city = get_fbi_row_on_city(cleaned_census_row, fbi_dict)
       if fbi_row_on_city:
