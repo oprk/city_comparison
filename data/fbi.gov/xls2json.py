@@ -9,6 +9,22 @@ import xlrd
 
 FBI_DICT = {}
 
+STATES_CITIES_DICT = {}
+
+
+def add_city_to_dict(city_name, state_name):
+  if state_name not in STATES_CITIES_DICT:
+    STATES_CITIES_DICT[state_name] = []
+  STATES_CITIES_DICT[state_name].append(city_name)
+
+
+def write_json_files():
+  with open('fbi_cities_crime_2017.json', 'w') as file_handler:
+    json.dump(FBI_DICT, file_handler)
+
+  with open('fbi_states_cities.json', 'w') as file_handler:
+    json.dump(STATES_CITIES_DICT, file_handler)
+
 
 def convert_xls_to_json(xls_file):
   """ Convert one xls file to json """
@@ -20,31 +36,34 @@ def convert_xls_to_json(xls_file):
     exit(1)
 
   column_headers = []
-
+  state_name = ''
   for rownum in range(sheet_0.nrows):
     row_values = sheet_0.row_values(rownum)
     # save the header information
-    if rownum == 4:
-      headers = [x.replace('\n', '') for x in row_values]
+    if rownum == 3:
+      headers = [x.replace('\n', ' ') for x in row_values]
       column_headers = headers
     # if the population float or int is there, save that row to the dictionary
-    if isinstance(row_values[3], float):
+    if isinstance(row_values[2], float):
       xls_dict_row = collections.OrderedDict()
       for index, cell_value in enumerate(row_values):
         xls_dict_row[column_headers[index]] = cell_value
 
-      FBI_DICT[int(row_values[3])] = {'xls_dict_row': xls_dict_row}
-      FBI_DICT[row_values[1].lower()] = {
+      if rownum > 3 and row_values[0] != '':
+        state_name = row_values[0].lower()
+        state_name = ''.join(
+            [char for char in state_name if not char.isdigit()])
+      city_name = row_values[1].lower()
+      city_name = ''.join([char for char in city_name if not char.isdigit()])
+      # FBI_DICT[int(row_values[2])] = {'xls_dict_row': xls_dict_row}
+      state_city = '{}_{}'.format(state_name, city_name)
+      FBI_DICT[state_city] = {
           'xls_dict_row': xls_dict_row,
-          'population': int(row_values[3]),
+          'population': int(row_values[2]),
       }
-    sheet_0.row_values(rownum)
-
-  with open('fbi_cities_crime_2017.json', 'w') as file_handler:
-    json.dump(FBI_DICT, file_handler)
+      add_city_to_dict(city_name, state_name)
+  write_json_files()
 
 
 convert_xls_to_json(
-    # pylint: disable=line-too-long
-    'Table_4_January_to_June_2018_Offenses_Reported_to_Law_Enforcement_by_State_by_City_100,000_and_Over_in_Population.xls'
-)
+    'Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls')
