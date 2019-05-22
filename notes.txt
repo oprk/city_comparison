@@ -13,3 +13,5 @@
   - combined city area from census.gov with city population data
   - found interesting HUD data per city: https://www.huduser.gov/portal/datasets/socds.html
   - HUD API takes the census GEOid code! ( https://www.huduser.gov/portal/dataset/api.html )
+# 2019-05-22
+  - credit scores by city: https://lendedu.com/blog/best-credit-score/
