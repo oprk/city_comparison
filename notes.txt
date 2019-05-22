@@ -9,3 +9,7 @@
   - switch from name matching and population within 2% to within 10%
   - Realized cities have the same names in different states, switched key lookup to statename_cityname, 93 cities without crime data now.
   - removed integers from state names in fbi data, down to 62 cities without crime data
+# 2019-05-21
+  - combined city area from census.gov with city population data
+  - found interesting HUD data per city: https://www.huduser.gov/portal/datasets/socds.html
+  - HUD API takes the census GEOid code! ( https://www.huduser.gov/portal/dataset/api.html )
