@@ -1,0 +1,1066 @@
+City,State,Credit Score
+Camden,New Jersey,547.0
+Pinon,Arizona,549.0
+Chester,Pennsylvania,552.0
+Highland Park,Michigan,552.0
+Riverdale,Illinois,558.0
+Inkster,Michigan,563.0
+East Orange,New Jersey,564.0
+Detroit,Michigan,565.0
+Irvington,New Jersey,566.0
+Harvey,Illinois,566.0
+Hartford,Connecticut,573.0
+Darby,Pennsylvania,573.0
+Pontiac,Michigan,573.0
+Brooklyn,Maryland,576.0
+Gary,Indiana,576.0
+Orange,New Jersey,577.0
+Belle Glade,Florida,577.0
+New Brunswick,New Jersey,578.0
+Union City,Georgia,578.0
+Riverdale,Georgia,581.0
+Forest Park,Georgia,583.0
+Suitland,Maryland,583.0
+Adelanto,California,585.0
+District Heights,Maryland,586.0
+Dolton,Illinois,586.0
+Elizabethport,New Jersey,587.0
+Lancaster,Texas,587.0
+Newark,New Jersey,588.0
+East Chicago,Indiana,588.0
+Maywood,Illinois,590.0
+Lithonia,Georgia,590.0
+Atlantic City,New Jersey,590.0
+Oxon Hill,Maryland,591.0
+Mattapan,Massachusetts,591.0
+Capitol Heights,Maryland,591.0
+Roxbury,Massachusetts,592.0
+Benton Harbor,Michigan,593.0
+Albany,Georgia,596.0
+Greenville,Mississippi,598.0
+Quincy,Florida,599.0
+Immokalee,Florida,599.0
+Jackson,Mississippi,599.0
+Flint,Michigan,599.0
+Mercedes,Texas,601.0
+Paterson,New Jersey,601.0
+Miami Gardens,Florida,602.0
+Clarksdale,Mississippi,602.0
+Jonesboro,Georgia,602.0
+Selma,Alabama,602.0
+Calumet City,Illinois,603.0
+Blytheville,Arkansas,603.0
+Greenwood,Mississippi,604.0
+Austell,Georgia,604.0
+Dorchester Center,Massachusetts,605.0
+Yazoo City,Mississippi,605.0
+Donna,Texas,606.0
+Alice,Texas,606.0
+Gwynn Oak,Maryland,607.0
+Horn Lake,Mississippi,607.0
+Perth Amboy,New Jersey,607.0
+Del Valle,Texas,607.0
+Opelousas,Louisiana,607.0
+Memphis,Tennessee,607.0
+Cordele,Georgia,608.0
+Norcross,Georgia,608.0
+Americus,Georgia,609.0
+Hamtramck,Michigan,609.0
+North Charleston,South Carolina,609.0
+Plainfield,New Jersey,609.0
+San Bernardino,California,610.0
+Temple Hills,Maryland,610.0
+Corcoran,California,610.0
+Lawrence,Massachusetts,611.0
+Fairburn,Georgia,611.0
+Petersburg,Virginia,611.0
+Edgewood,Maryland,612.0
+Ellenwood,Georgia,612.0
+Beeville,Texas,612.0
+Maple Heights,Ohio,612.0
+Newberry,South Carolina,612.0
+Orangeburg,South Carolina,612.0
+Madison,Tennessee,614.0
+Waterbury,Connecticut,614.0
+Stone Mountain,Georgia,614.0
+Hephzibah,Georgia,615.0
+Morrow,Georgia,615.0
+Laurens,South Carolina,615.0
+Windsor Mill,Maryland,615.0
+Barstow,California,615.0
+Opa Locka,Florida,615.0
+Springfield,Massachusetts,615.0
+San Benito,Texas,616.0
+Monroe,Louisiana,617.0
+Eastpointe,Michigan,617.0
+Dorchester,Massachusetts,617.0
+Darlington,South Carolina,617.0
+Edinburg,Texas,617.0
+Chicago Heights,Illinois,617.0
+Pharr,Texas,618.0
+Alamo,Texas,619.0
+Sun Valley,Nevada,619.0
+Channelview,Texas,619.0
+Brownsville,Texas,619.0
+Fresno,Texas,619.0
+Palatka,Florida,620.0
+Alexandria,Louisiana,620.0
+Shreveport,Louisiana,620.0
+Texas City,Texas,621.0
+Rossville,Georgia,621.0
+Canton,Mississippi,621.0
+West Memphis,Arkansas,621.0
+Tarboro,North Carolina,621.0
+Gaffney,South Carolina,621.0
+Baltimore,Maryland,621.0
+Mccomb,Mississippi,622.0
+Mount Morris,Michigan,622.0
+El Mirage,Arizona,622.0
+Robstown,Texas,622.0
+Walterboro,South Carolina,622.0
+Talladega,Alabama,622.0
+Marshall,Texas,622.0
+San Juan,Texas,622.0
+East Saint Louis,Illinois,623.0
+Hobbs,New Mexico,623.0
+Griffin,Georgia,623.0
+Victorville,California,623.0
+Park Forest,Illinois,623.0
+Haltom City,Texas,623.0
+Kansas City,Kansas,623.0
+Clarkston,Georgia,624.0
+Laredo,Texas,624.0
+Hyattsville,Maryland,624.0
+Lithia Springs,Georgia,624.0
+Mount Vernon,New York,624.0
+Euclid,Ohio,624.0
+Bastrop,Louisiana,624.0
+Odessa,Texas,624.0
+Grandview,Missouri,624.0
+Riverdale,Maryland,624.0
+Tolleson,Arizona,625.0
+Augusta,Georgia,626.0
+New Haven,Connecticut,626.0
+Upper Darby,Pennsylvania,626.0
+Montgomery,Alabama,626.0
+Covington,Georgia,626.0
+Waianae,Hawaii,626.0
+Homestead,Florida,626.0
+Portsmouth,Virginia,627.0
+Fort Hood,Texas,627.0
+Westwego,Louisiana,627.0
+Bessemer,Alabama,627.0
+Daytona Beach,Florida,627.0
+Hampton,Georgia,627.0
+Henderson,North Carolina,627.0
+Killeen,Texas,627.0
+Macon,Georgia,627.0
+Far Rockaway,New York,627.0
+Columbus,Georgia,628.0
+Brunswick,Georgia,628.0
+Lumberton,North Carolina,628.0
+Bridgeport,Connecticut,628.0
+New Britain,Connecticut,628.0
+North Las Vegas,Nevada,628.0
+Bridgeton,New Jersey,629.0
+Lehigh Acres,Florida,629.0
+Bainbridge,Georgia,629.0
+Randallstown,Maryland,629.0
+Mineral Wells,Texas,630.0
+Rialto,California,630.0
+Harvey,Louisiana,630.0
+Clementon,New Jersey,630.0
+Hammond,Indiana,630.0
+Phenix City,Alabama,630.0
+Liberal,Kansas,630.0
+Alvarado,Texas,630.0
+Mesquite,Texas,630.0
+North Little Rock,Arkansas,630.0
+Laurinburg,North Carolina,631.0
+Mission,Texas,631.0
+Cedartown,Georgia,631.0
+Paris,Texas,631.0
+Compton,California,631.0
+Roselle,New Jersey,632.0
+Valdosta,Georgia,632.0
+Philadelphia,Pennsylvania,632.0
+Eagle Pass,Texas,632.0
+Douglas,Georgia,632.0
+Rocky Mount,North Carolina,632.0
+Balch Springs,Texas,632.0
+Tuscaloosa,Alabama,632.0
+Kinston,North Carolina,632.0
+New Castle,Delaware,633.0
+Rio Grande City,Texas,633.0
+Dallas,Texas,633.0
+Hinesville,Georgia,633.0
+Lorain,Ohio,633.0
+Elizabeth,New Jersey,633.0
+Pine Bluff,Arkansas,633.0
+Jacksonville,Arkansas,633.0
+Hopewell,Virginia,633.0
+Spartanburg,South Carolina,633.0
+Webster,Texas,634.0
+Port Arthur,Texas,634.0
+Plainview,Texas,634.0
+Gallup,New Mexico,634.0
+Texarkana,Arkansas,634.0
+Kingsville,Texas,634.0
+Decatur,Georgia,634.0
+Moultrie,Georgia,634.0
+Mobile,Alabama,634.0
+Willingboro,New Jersey,635.0
+Desert Hot Springs,California,635.0
+Radcliff,Kentucky,635.0
+Saint Albans,New York,635.0
+Big Spring,Texas,635.0
+Greenville,North Carolina,635.0
+Lagrange,Georgia,635.0
+Moreno Valley,California,636.0
+Fort Worth,Texas,636.0
+Bronx,New York,636.0
+Newport News,Virginia,636.0
+Wasco,California,636.0
+Willimantic,Connecticut,637.0
+Avondale,Arizona,637.0
+Longview,Texas,637.0
+Indianapolis,Indiana,637.0
+Weslaco,Texas,637.0
+Desoto,Texas,637.0
+Colton,California,637.0
+Romulus,Michigan,637.0
+Dublin,Georgia,637.0
+Hempstead,New York,637.0
+Bartow,Florida,637.0
+Thomaston,Georgia,637.0
+Jesup,Georgia,638.0
+Terrell,Texas,638.0
+San Jacinto,California,638.0
+Redford,Michigan,638.0
+New Bedford,Massachusetts,638.0
+Holyoke,Massachusetts,638.0
+Anniston,Alabama,638.0
+Toledo,Ohio,638.0
+Chatsworth,Georgia,638.0
+Harlingen,Texas,638.0
+Savannah,Georgia,638.0
+Fort Pierce,Florida,638.0
+Shelbyville,Tennessee,638.0
+Chalmette,Louisiana,638.0
+Perris,California,638.0
+Merrillville,Indiana,639.0
+La Vergne,Tennessee,639.0
+Natchitoches,Louisiana,639.0
+Wilson,North Carolina,639.0
+Palestine,Texas,639.0
+Jacksonville,Texas,639.0
+Lancaster,California,639.0
+Perry,Florida,639.0
+Grand Prairie,Texas,639.0
+Thermal,California,639.0
+Ladson,South Carolina,639.0
+Nacogdoches,Texas,639.0
+Trenton,New Jersey,639.0
+Richmond,Virginia,640.0
+Georgetown,South Carolina,640.0
+Millville,New Jersey,640.0
+Statesboro,Georgia,640.0
+Tahlequah,Oklahoma,640.0
+Pampa,Texas,640.0
+Elmira,New York,640.0
+Oak Park,Michigan,640.0
+New Orleans,Louisiana,640.0
+Corpus Christi,Texas,640.0
+Passaic,New Jersey,640.0
+Sanford,Florida,640.0
+Greenwood,South Carolina,640.0
+Fresno,California,641.0
+Conyers,Georgia,641.0
+Columbus,Mississippi,641.0
+Opelika,Alabama,641.0
+Ennis,Texas,641.0
+Tifton,Georgia,641.0
+Shelby,North Carolina,641.0
+Laveen,Arizona,641.0
+Rosenberg,Texas,642.0
+New Iberia,Louisiana,642.0
+Waycross,Georgia,642.0
+Milledgeville,Georgia,642.0
+Kissimmee,Florida,642.0
+Pascagoula,Mississippi,642.0
+Brockton,Massachusetts,642.0
+Norfolk,Virginia,642.0
+Port Huron,Michigan,642.0
+Lanham,Maryland,642.0
+Newport,Tennessee,642.0
+Sylacauga,Alabama,642.0
+San Marcos,Texas,642.0
+Coachella,California,642.0
+Matteson,Illinois,642.0
+Sumter,South Carolina,642.0
+Essex,Maryland,642.0
+Blythe,California,642.0
+Bakersfield,California,642.0
+Richmond,California,642.0
+Houston,Texas,642.0
+Lansdowne,Pennsylvania,643.0
+Stockbridge,Georgia,643.0
+Natchez,Mississippi,643.0
+New Caney,Texas,643.0
+Martinsburg,West Virginia,643.0
+Arvin,California,643.0
+Clinton,North Carolina,643.0
+Uvalde,Texas,643.0
+Woonsocket,Rhode Island,643.0
+Milwaukee,Wisconsin,643.0
+Bloomington,California,643.0
+Gastonia,North Carolina,643.0
+North Highlands,California,643.0
+Chattanooga,Tennessee,643.0
+Columbia,South Carolina,643.0
+Selma,California,643.0
+Spring Lake,North Carolina,643.0
+Shafter,California,643.0
+Bristol,Pennsylvania,644.0
+Burton,Michigan,644.0
+Chelsea,Massachusetts,644.0
+Kilgore,Texas,644.0
+Morgan City,Louisiana,644.0
+Kannapolis,North Carolina,644.0
+Sherman,Texas,644.0
+Inglewood,California,644.0
+Manor,Texas,644.0
+Cleburne,Texas,644.0
+Alexander City,Alabama,644.0
+Douglasville,Georgia,644.0
+Vicksburg,Mississippi,644.0
+Orlando,Florida,644.0
+Hopkinsville,Kentucky,644.0
+Arlington,Texas,644.0
+La Place,Louisiana,644.0
+Delano,California,645.0
+Del Rio,Texas,645.0
+Hesperia,California,645.0
+Cleveland,Ohio,645.0
+Durant,Oklahoma,645.0
+Gulfport,Mississippi,645.0
+Kyle,Texas,645.0
+Rockingham,North Carolina,645.0
+Hammond,Louisiana,645.0
+Lancaster,South Carolina,645.0
+Portsmouth,Ohio,645.0
+Zion,Illinois,645.0
+El Dorado,Arkansas,646.0
+Brownwood,Texas,646.0
+Danville,Illinois,646.0
+Huntington,West Virginia,646.0
+Ironton,Ohio,646.0
+Laurel,Mississippi,646.0
+Converse,Texas,646.0
+Phoenix,Arizona,646.0
+Hattiesburg,Mississippi,646.0
+Oklahoma City,Oklahoma,646.0
+Dyersburg,Tennessee,646.0
+Troy,Alabama,646.0
+Stockton,California,646.0
+Rosedale,New York,646.0
+Bay City,Texas,646.0
+Pasadena,Texas,646.0
+Texarkana,Texas,646.0
+Labelle,Florida,646.0
+South Holland,Illinois,646.0
+Meridian,Mississippi,646.0
+Springfield Gardens,New York,647.0
+Jackson,Georgia,647.0
+Newburgh,New York,647.0
+Dinuba,California,647.0
+Roanoke Rapids,North Carolina,647.0
+Greenbelt,Maryland,647.0
+Palmdale,California,647.0
+Southaven,Mississippi,647.0
+Jacksonville,Florida,647.0
+Las Vegas,Nevada,647.0
+Cicero,Illinois,647.0
+West Palm Beach,Florida,647.0
+Covington,Kentucky,647.0
+Long Branch,New Jersey,647.0
+Lake City,Florida,647.0
+Southfield,Michigan,647.0
+Hampton,Virginia,648.0
+Dundalk,Maryland,648.0
+Mulberry,Florida,648.0
+Ruskin,Florida,648.0
+Tulare,California,648.0
+Winder,Georgia,648.0
+Mount Pleasant,Texas,648.0
+Las Vegas,New Mexico,648.0
+West Valley City,Utah,648.0
+Waukegan,Illinois,648.0
+Antioch,Tennessee,648.0
+New London,Connecticut,648.0
+Hartsville,South Carolina,648.0
+Philadelphia,Mississippi,648.0
+Lake Charles,Louisiana,648.0
+Saginaw,Michigan,648.0
+Paramount,California,649.0
+Dayton,Texas,649.0
+Tulsa,Oklahoma,649.0
+Baytown,Texas,649.0
+Hillside,New Jersey,649.0
+Providence,Rhode Island,649.0
+Roseville,Michigan,649.0
+Victoria,Texas,649.0
+Kings Mountain,North Carolina,649.0
+Waldorf,Maryland,649.0
+Marrero,Louisiana,649.0
+Leesville,Louisiana,649.0
+Bluefield,West Virginia,649.0
+National City,California,650.0
+Tupelo,Mississippi,650.0
+Houma,Louisiana,650.0
+El Paso,Texas,650.0
+Pawtucket,Rhode Island,650.0
+Lincoln Park,Michigan,650.0
+Dalton,Georgia,650.0
+Lubbock,Texas,650.0
+Gretna,Louisiana,650.0
+Glendale,Arizona,650.0
+Mcallen,Texas,650.0
+Fort Bragg,North Carolina,650.0
+Clovis,New Mexico,650.0
+Theodore,Alabama,650.0
+East Hartford,Connecticut,650.0
+Thomasville,Georgia,650.0
+Birmingham,Alabama,650.0
+Corsicana,Texas,650.0
+Calhoun,Georgia,650.0
+Shawnee,Oklahoma,650.0
+Fontana,California,650.0
+Fayetteville,North Carolina,650.0
+San Antonio,Texas,650.0
+Raeford,North Carolina,650.0
+Elgin,Texas,650.0
+Forest City,North Carolina,650.0
+Little Rock,Arkansas,650.0
+Jeffersonville,Indiana,651.0
+Roswell,New Mexico,651.0
+Florence,South Carolina,651.0
+Lynwood,California,651.0
+Henderson,Texas,651.0
+Jackson,Tennessee,651.0
+Kingsland,Georgia,651.0
+Cocoa,Florida,651.0
+Baton Rouge,Louisiana,651.0
+Springdale,Arkansas,651.0
+Bell Gardens,California,651.0
+Rosharon,Texas,651.0
+Wilmington,California,651.0
+Waco,Texas,651.0
+Tampa,Florida,651.0
+Greensboro,North Carolina,651.0
+Panama City,Florida,651.0
+Ruston,Louisiana,652.0
+Moss Point,Mississippi,652.0
+Defuniak Springs,Florida,652.0
+Lynn,Massachusetts,652.0
+Muskegon,Michigan,652.0
+Auburndale,Florida,652.0
+Sulphur Springs,Texas,652.0
+Wichita Falls,Texas,652.0
+Junction City,Kansas,652.0
+Albertville,Alabama,652.0
+Lufkin,Texas,652.0
+Copperas Cove,Texas,652.0
+Amarillo,Texas,652.0
+Mabank,Texas,652.0
+Middle River,Maryland,652.0
+Clinton,Maryland,652.0
+North Vernon,Indiana,652.0
+Allentown,Pennsylvania,652.0
+Olivehurst,California,652.0
+Antioch,California,652.0
+Lakeland,Florida,652.0
+Warner Robins,Georgia,652.0
+Pearl,Mississippi,653.0
+Hiram,Georgia,653.0
+Anderson,Indiana,653.0
+Burlington,North Carolina,653.0
+Taylor,Michigan,653.0
+Vineland,New Jersey,653.0
+Union City,New Jersey,653.0
+Deming,New Mexico,653.0
+Seguin,Texas,653.0
+Marysville,California,653.0
+Bedford,Ohio,653.0
+Aberdeen,Maryland,653.0
+Porterville,California,653.0
+Poplar Bluff,Missouri,653.0
+Okeechobee,Florida,653.0
+Corbin,Kentucky,653.0
+Smithfield,North Carolina,653.0
+Muskogee,Oklahoma,653.0
+The Villages,Florida,804.0
+Sun City West,Arizona,789.0
+Green Valley,Arizona,780.0
+Saratoga,California,777.0
+Los Altos,California,776.0
+Needham,Massachusetts,774.0
+Lexington,Massachusetts,773.0
+Pittsford,New York,770.0
+Princeton Junction,New Jersey,770.0
+Potomac,Maryland,768.0
+Mequon,Wisconsin,768.0
+Chesterfield,Missouri,768.0
+Cupertino,California,767.0
+Brookfield,Wisconsin,767.0
+Verona,Wisconsin,766.0
+Westford,Massachusetts,766.0
+Winchester,Massachusetts,766.0
+Basking Ridge,New Jersey,766.0
+Colleyville,Texas,766.0
+Sun City Center,Florida,766.0
+Mercer Island,Washington,766.0
+Northbrook,Illinois,765.0
+Wilmette,Illinois,765.0
+Wexford,Pennsylvania,765.0
+Sammamish,Washington,765.0
+Chanhassen,Minnesota,765.0
+Minnetonka,Minnesota,764.0
+Scarsdale,New York,764.0
+East Amherst,New York,764.0
+San Carlos,California,764.0
+Acton,Massachusetts,763.0
+Maple Grove,Minnesota,763.0
+Palos Verdes Peninsula,California,763.0
+Westfield,New Jersey,763.0
+Hudson,Ohio,763.0
+Barrington,Illinois,762.0
+Lafayette,California,762.0
+Byron Center,Michigan,762.0
+Deerfield,Illinois,762.0
+La Canada Flintridge,California,762.0
+New Berlin,Wisconsin,761.0
+Southlake,Texas,761.0
+Livingston,New Jersey,761.0
+Muskego,Wisconsin,761.0
+Belmont,Massachusetts,761.0
+Lake Forest,Illinois,761.0
+Arlington,Massachusetts,761.0
+Lake Zurich,Illinois,761.0
+Libertyville,Illinois,761.0
+Danville,California,760.0
+Estero,Florida,760.0
+Menomonee Falls,Wisconsin,760.0
+Evergreen,Colorado,760.0
+Middleton,Wisconsin,760.0
+Bainbridge Island,Washington,760.0
+Highland Park,Illinois,760.0
+Bethesda,Maryland,760.0
+Zionsville,Indiana,760.0
+Plainview,New York,760.0
+Rancho Palos Verdes,California,759.0
+Gibsonia,Pennsylvania,759.0
+Hingham,Massachusetts,759.0
+Vienna,Virginia,759.0
+Powell,Ohio,759.0
+Syosset,New York,759.0
+Andover,Massachusetts,758.0
+Garden City,New York,758.0
+Los Gatos,California,758.0
+Chevy Chase,Maryland,758.0
+Penfield,New York,758.0
+Reading,Massachusetts,758.0
+Manhattan Beach,California,758.0
+Brentwood,Tennessee,758.0
+Lutherville Timonium,Maryland,758.0
+Germantown,Tennessee,758.0
+Louisville,Colorado,758.0
+Mill Valley,California,758.0
+Park Ridge,Illinois,757.0
+Darien,Connecticut,757.0
+Sewickley,Pennsylvania,757.0
+Carmel,Indiana,757.0
+Avon,Ohio,757.0
+Chestnut Hill,Massachusetts,757.0
+Huntley,Illinois,757.0
+Wayne,Pennsylvania,757.0
+Johnston,Iowa,757.0
+Chagrin Falls,Ohio,756.0
+Northville,Michigan,756.0
+Burlingame,California,756.0
+Bridgewater,New Jersey,756.0
+Newtown,Pennsylvania,756.0
+Bedford,New Hampshire,756.0
+Belmont,California,756.0
+Monument,Colorado,756.0
+Glenview,Illinois,756.0
+Geneva,Illinois,756.0
+Ridgewood,New Jersey,756.0
+Pewaukee,Wisconsin,756.0
+Pacific Palisades,California,756.0
+Monroe Township,New Jersey,756.0
+Franklin,Wisconsin,756.0
+Little Neck,New York,755.0
+Fairport,New York,755.0
+Bloomfield Hills,Michigan,755.0
+Westport,Connecticut,755.0
+Mc Lean,Virginia,755.0
+Allison Park,Pennsylvania,755.0
+Great Neck,New York,755.0
+Eden Prairie,Minnesota,755.0
+Redmond,Washington,755.0
+Morganville,New Jersey,755.0
+Pleasanton,California,754.0
+Granite Bay,California,754.0
+Buffalo Grove,Illinois,754.0
+Hudsonville,Michigan,754.0
+Cranberry Township,Pennsylvania,754.0
+San Ramon,California,754.0
+Glastonbury,Connecticut,754.0
+Independence,Ohio,754.0
+Saline,Michigan,754.0
+New Hyde Park,New York,754.0
+Erie,Colorado,754.0
+Ridgefield,Connecticut,753.0
+Stillwater,Minnesota,753.0
+Hartland,Wisconsin,753.0
+Solon,Ohio,753.0
+Collegeville,Pennsylvania,753.0
+Ellicott City,Maryland,753.0
+Lady Lake,Florida,753.0
+Issaquah,Washington,753.0
+Natick,Massachusetts,753.0
+Cheshire,Connecticut,753.0
+Millbrae,California,753.0
+Northport,New York,753.0
+Menlo Park,California,752.0
+Paramus,New Jersey,752.0
+Guilford,Connecticut,752.0
+Lemont,Illinois,752.0
+Chelmsford,Massachusetts,752.0
+Darien,Illinois,752.0
+Woodinville,Washington,752.0
+Elmhurst,Illinois,752.0
+Ambler,Pennsylvania,752.0
+Mahwah,New Jersey,752.0
+Lake Oswego,Oregon,752.0
+Homer Glen,Illinois,752.0
+Merrick,New York,752.0
+Massapequa Park,New York,752.0
+Cranford,New Jersey,751.0
+Melville,New York,751.0
+Brookline,Massachusetts,751.0
+Mountain View,California,751.0
+Malvern,Pennsylvania,751.0
+Harleysville,Pennsylvania,751.0
+New Albany,Ohio,751.0
+Huntingdon Valley,Pennsylvania,751.0
+Granger,Indiana,751.0
+Fountain Hills,Arizona,751.0
+Lewes,Delaware,751.0
+Randolph,New Jersey,750.0
+Hillsborough,New Jersey,750.0
+Marblehead,Massachusetts,750.0
+Walnut Creek,California,750.0
+Lakeville,Minnesota,750.0
+Avon Lake,Ohio,750.0
+Oakland Gardens,New York,750.0
+Westwood,New Jersey,750.0
+Burke,Virginia,750.0
+Severna Park,Maryland,750.0
+Princeton,New Jersey,750.0
+El Dorado Hills,California,750.0
+Glen Ellyn,Illinois,750.0
+Ponte Vedra Beach,Florida,750.0
+Birmingham,Michigan,750.0
+Ballwin,Missouri,750.0
+Orland Park,Illinois,749.0
+Webster,New York,749.0
+Prior Lake,Minnesota,749.0
+Albany,California,749.0
+Bellevue,Washington,749.0
+Doylestown,Pennsylvania,749.0
+Chalfont,Pennsylvania,749.0
+Plymouth,Michigan,749.0
+Arlington Heights,Illinois,749.0
+Caldwell,New Jersey,749.0
+Bryn Mawr,Pennsylvania,749.0
+Springboro,Ohio,749.0
+Dublin,California,749.0
+De Pere,Wisconsin,749.0
+Eagle,Idaho,749.0
+Lititz,Pennsylvania,749.0
+Warrington,Pennsylvania,748.0
+Andover,Minnesota,748.0
+New City,New York,748.0
+Yorktown Heights,New York,748.0
+Venice,Florida,748.0
+Wheaton,Illinois,748.0
+Wantagh,New York,748.0
+Commack,New York,748.0
+Sequim,Washington,748.0
+Westlake Village,California,748.0
+Sunnyvale,California,748.0
+Forest Hills,New York,748.0
+North Wales,Pennsylvania,748.0
+Hugo,Minnesota,748.0
+Savage,Minnesota,747.0
+Northfield,Minnesota,747.0
+South Windsor,Connecticut,747.0
+Burlington,Massachusetts,747.0
+Southampton,Pennsylvania,747.0
+Westlake,Ohio,747.0
+Orchard Park,New York,747.0
+Summit,New Jersey,747.0
+Rocky River,Ohio,747.0
+Shrewsbury,Massachusetts,747.0
+Canfield,Ohio,747.0
+East Brunswick,New Jersey,747.0
+Bronxville,New York,747.0
+Mason,Ohio,747.0
+Mokena,Illinois,747.0
+La Jolla,California,747.0
+Bethel Park,Pennsylvania,747.0
+Strongsville,Ohio,747.0
+Trabuco Canyon,California,747.0
+Dublin,Ohio,747.0
+Vernon Hills,Illinois,747.0
+Seal Beach,California,747.0
+Chapel Hill,North Carolina,746.0
+Hudson,Wisconsin,746.0
+Port Washington,New York,746.0
+West Linn,Oregon,746.0
+Okemos,Michigan,746.0
+Osseo,Minnesota,746.0
+Cary,North Carolina,746.0
+Oconomowoc,Wisconsin,746.0
+Flower Mound,Texas,746.0
+Lancaster,New York,746.0
+Essex Junction,Vermont,746.0
+Fair Lawn,New Jersey,746.0
+Melrose,Massachusetts,746.0
+Olney,Maryland,746.0
+Smithtown,New York,746.0
+Troy,Michigan,746.0
+Yorba Linda,California,746.0
+Ankeny,Iowa,746.0
+Flemington,New Jersey,745.0
+Medford,New Jersey,745.0
+Morton Grove,Illinois,745.0
+Caledonia,Michigan,745.0
+West Chester,Pennsylvania,745.0
+East Northport,New York,745.0
+Golden,Colorado,745.0
+Southington,Connecticut,745.0
+Macungie,Pennsylvania,745.0
+Littleton,Colorado,745.0
+Forest,Virginia,745.0
+Lone Tree,Colorado,745.0
+Lewis Center,Ohio,745.0
+Aurora,Ohio,745.0
+Wayne,New Jersey,744.0
+Haymarket,Virginia,744.0
+Rochester,Michigan,744.0
+Ashburn,Virginia,744.0
+Scotch Plains,New Jersey,744.0
+Anacortes,Washington,744.0
+Hoboken,New Jersey,744.0
+Urbandale,Iowa,744.0
+Palm City,Florida,744.0
+Waukee,Iowa,744.0
+Wakefield,Rhode Island,744.0
+Naperville,Illinois,744.0
+Cave Creek,Arizona,744.0
+Kenmore,Washington,744.0
+Seaford,New York,744.0
+Franklin,Massachusetts,743.0
+Windsor,Colorado,743.0
+Broomall,Pennsylvania,743.0
+Sebastopol,California,743.0
+El Cerrito,California,743.0
+Washington,Michigan,743.0
+Boulder,Colorado,743.0
+Aptos,California,743.0
+Onalaska,Wisconsin,743.0
+Springfield,Pennsylvania,743.0
+Wakefield,Massachusetts,743.0
+Downingtown,Pennsylvania,742.0
+Willowbrook,Illinois,742.0
+Encinitas,California,742.0
+Whitestone,New York,742.0
+Jenison,Michigan,742.0
+Davis,California,742.0
+Sykesville,Maryland,742.0
+Havertown,Pennsylvania,742.0
+Kirkland,Washington,742.0
+Rockford,Michigan,742.0
+North Royalton,Ohio,742.0
+Arcadia,California,742.0
+Mililani,Hawaii,742.0
+Calabasas,California,742.0
+Cerritos,California,742.0
+Sun City,Arizona,742.0
+Kaysville,Utah,742.0
+Agoura Hills,California,742.0
+Argyle,Texas,742.0
+Apex,North Carolina,742.0
+Fremont,California,742.0
+Media,Pennsylvania,742.0
+Wilmington,Massachusetts,741.0
+Trumbull,Connecticut,741.0
+Floral Park,New York,741.0
+South Pasadena,California,741.0
+Chantilly,Virginia,741.0
+Bayside,New York,741.0
+Coppell,Texas,741.0
+North Andover,Massachusetts,741.0
+Folsom,California,741.0
+Walnut,California,741.0
+Madison,Mississippi,741.0
+Farmington,Utah,741.0
+Grand Island,New York,741.0
+Porter Ranch,California,740.0
+Commerce Township,Michigan,740.0
+Edmonds,Washington,740.0
+Franklin,Tennessee,740.0
+Bellmore,New York,740.0
+Parsippany,New Jersey,740.0
+Rockaway,New Jersey,740.0
+Mukilteo,Washington,740.0
+Rocky Hill,Connecticut,740.0
+Saint Charles,Illinois,740.0
+Carlsbad,California,740.0
+Circle Pines,Minnesota,740.0
+Rochester,Minnesota,740.0
+West Chester,Ohio,740.0
+Zeeland,Michigan,740.0
+Parker,Colorado,740.0
+Rockville Centre,New York,740.0
+Moorestown,New Jersey,740.0
+Bettendorf,Iowa,740.0
+Fairfield,Connecticut,740.0
+Huntington,New York,740.0
+Frankfort,Illinois,740.0
+Champlin,Minnesota,740.0
+Watertown,Massachusetts,739.0
+Rosemount,Minnesota,739.0
+Saint Johns,Florida,739.0
+Irwin,Pennsylvania,739.0
+Clifton Park,New York,739.0
+East Meadow,New York,739.0
+Bothell,Washington,739.0
+Mechanicsburg,Pennsylvania,739.0
+New Lenox,Illinois,739.0
+Massapequa,New York,738.0
+Saint Joseph,Michigan,738.0
+Ann Arbor,Michigan,738.0
+South Lyon,Michigan,738.0
+Northfield,Ohio,738.0
+Brighton,Michigan,738.0
+Lake Saint Louis,Missouri,738.0
+Westfield,Indiana,738.0
+Laguna Beach,California,738.0
+Kennett Square,Pennsylvania,738.0
+Milpitas,California,738.0
+Arroyo Grande,California,738.0
+Vestal,New York,738.0
+San Mateo,California,738.0
+Bonita Springs,Florida,738.0
+Campbell,California,738.0
+La Crescenta,California,738.0
+Collierville,Tennessee,738.0
+West Roxbury,Massachusetts,738.0
+Canton,Massachusetts,738.0
+Cedar Falls,Iowa,737.0
+Langhorne,Pennsylvania,737.0
+Fairfax,Virginia,737.0
+Grayslake,Illinois,737.0
+Warminster,Pennsylvania,737.0
+Peachtree City,Georgia,737.0
+Sugar Land,Texas,737.0
+Novi,Michigan,737.0
+Novato,California,737.0
+Clarks Summit,Pennsylvania,737.0
+Fishers,Indiana,737.0
+Camas,Washington,737.0
+Uniontown,Ohio,737.0
+Coronado,California,737.0
+West Bloomfield,Michigan,737.0
+Santa Clara,California,737.0
+Bismarck,North Dakota,737.0
+Englishtown,New Jersey,736.0
+Sylvania,Ohio,736.0
+Kailua,Hawaii,736.0
+La Grange,Illinois,736.0
+Jasper,Indiana,736.0
+Chapin,South Carolina,736.0
+Oceanside,New York,736.0
+Grosse Pointe,Michigan,736.0
+Park City,Utah,736.0
+Redondo Beach,California,736.0
+Temple City,California,736.0
+Mount Airy,Maryland,736.0
+Hummelstown,Pennsylvania,736.0
+Latham,New York,736.0
+Waxhaw,North Carolina,736.0
+Castro Valley,California,736.0
+Reston,Virginia,736.0
+Macomb,Michigan,736.0
+Munster,Indiana,736.0
+Chaska,Minnesota,736.0
+Kaukauna,Wisconsin,736.0
+West Hartford,Connecticut,736.0
+Glen Allen,Virginia,736.0
+Arlington,Virginia,735.0
+Newbury Park,California,735.0
+Arnold,Maryland,735.0
+Cortlandt Manor,New York,735.0
+Cambridge,Massachusetts,735.0
+Marshfield,Wisconsin,735.0
+Bethpage,New York,735.0
+Stoneham,Massachusetts,735.0
+Loveland,Ohio,735.0
+Phoenixville,Pennsylvania,735.0
+Irvine,California,735.0
+State College,Pennsylvania,735.0
+Morristown,New Jersey,735.0
+Canonsburg,Pennsylvania,735.0
+Cary,Illinois,735.0
+Sparta,New Jersey,735.0
+Laguna Niguel,California,735.0
+Castle Rock,Colorado,735.0
+Fountain Valley,California,735.0
+King Of Prussia,Pennsylvania,734.0
+Hartford,Wisconsin,734.0
+Gig Harbor,Washington,734.0
+Alpharetta,Georgia,734.0
+Edison,New Jersey,734.0
+Maineville,Ohio,734.0
+Milton,Massachusetts,734.0
+Lansdale,Pennsylvania,734.0
+Alexandria,Minnesota,734.0
+South Jordan,Utah,734.0
+Diamond Bar,California,734.0
+Manheim,Pennsylvania,734.0
+Broomfield,Colorado,734.0
+Bella Vista,Arkansas,734.0
+Perkasie,Pennsylvania,733.0
+Springfield,Virginia,733.0
+Crestwood,Kentucky,733.0
+Milford,Michigan,733.0
+Merrimack,New Hampshire,733.0
+Mansfield,Massachusetts,733.0
+Ladera Ranch,California,733.0
+Washington,Illinois,733.0
+Sherwood,Oregon,733.0
+Exeter,New Hampshire,733.0
+Prescott,Arizona,733.0
+Westerville,Ohio,733.0
+Berkeley,California,733.0
+Tewksbury,Massachusetts,733.0
+Sun Prairie,Wisconsin,733.0
+Suffern,New York,733.0
+West Islip,New York,732.0
+Poway,California,732.0
+Clemmons,North Carolina,732.0
+West Fargo,North Dakota,732.0
+Grandville,Michigan,732.0
+Marlton,New Jersey,732.0
+Neenah,Wisconsin,732.0
+Palo Alto,California,732.0
+San Francisco,California,732.0
+Pacifica,California,732.0
+Dyer,Indiana,732.0
+Newington,Connecticut,732.0
+Morrisville,North Carolina,732.0
+Middletown,New Jersey,732.0
+Wethersfield,Connecticut,732.0
+Mission Viejo,California,732.0
+West Bend,Wisconsin,732.0
+Murrells Inlet,South Carolina,732.0
+Odessa,Florida,732.0
+Canton,Michigan,732.0
+Livonia,Michigan,732.0
+Mount Prospect,Illinois,732.0
+Greenwich,Connecticut,732.0
+Elk Grove Village,Illinois,732.0
+Lafayette,Colorado,732.0
+River Falls,Wisconsin,732.0
+Portsmouth,New Hampshire,731.0
+Mamaroneck,New York,731.0
+Perrysburg,Ohio,731.0
+Thousand Oaks,California,731.0
+Midlothian,Virginia,731.0
+Schererville,Indiana,731.0
+Mount Joy,Pennsylvania,731.0
+Suwanee,Georgia,731.0
+Bozeman,Montana,731.0
+Fort Mill,South Carolina,731.0
+Gainesville,Virginia,731.0
+Yorktown,Virginia,731.0
+Helotes,Texas,731.0
+Seattle,Washington,722.0
+Plano,Texas,720.0
+Saint Paul,Minnesota,718.0
+Honolulu,Hawaii,718.0
+San Jose,California,715.0
+Minneapolis,Minnesota,710.0
+Portland,Oregon,710.0
+Naples,Florida,708.0
+Alexandria,Virginia,707.0
+New York,New York,706.0
+Spring,Texas,706.0
+Staten Island,New York,702.0
+Pittsburgh,Pennsylvania,699.0
+Katy,Texas,699.0
+Omaha,Nebraska,696.0
+San Diego,California,696.0
+Marietta,Georgia,693.0
+Vancouver,Washington,689.0
+Spokane,Washington,689.0
+Raleigh,North Carolina,688.0
+Colorado Springs,Colorado,687.0
+Silver Spring,Maryland,687.0
+Salt Lake City,Utah,686.0
+Knoxville,Tennessee,686.0
+Brooklyn,New York,684.0
+Virginia Beach,Virginia,682.0
+Oakland,California,682.0
+Austin,Texas,682.0
+Denver,Colorado,680.0
+Grand Rapids,Michigan,677.0
+Anaheim,California,677.0
+Cincinnati,Ohio,677.0
+Tucson,Arizona,676.0
+Lexington,Kentucky,676.0
+Washington,District of Columbia,674.0
+Fort Wayne,Indiana,674.0
+Albuquerque,New Mexico,673.0
+Rochester,New York,673.0
+Buffalo,New York,672.0
+Aurora,Colorado,672.0
+Tacoma,Washington,671.0
+Dayton,Ohio,671.0
+Pompano Beach,Florida,670.0
+Mesa,Arizona,669.0
+Santa Ana,California,669.0
+Louisville,Kentucky,669.0
+Wichita,Kansas,669.0
+Nashville,Tennessee,668.0
+Sacramento,California,668.0
+Los Angeles,California,668.0
+Saint Petersburg,Florida,667.0
+Fort Lauderdale,Florida,667.0
+Hollywood,Florida,666.0
+Saint Louis,Missouri,666.0
+Reno,Nevada,666.0
+Riverside,California,665.0
+Kansas City,Missouri,665.0
+Long Beach,California,661.0
+Miami,Florida,661.0
+Charlotte,North Carolina,660.0
+Hialeah,Florida,657.0
+Chicago,Illinois,654.0
+Columbus,Ohio,654.0
+Atlanta,Georgia,654.0
+,,
