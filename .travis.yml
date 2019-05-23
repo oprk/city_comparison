@@ -8,7 +8,7 @@ install:
 script:
   # test and validate all backend files
   - flake8
-  - yapf --parallel --verbose --recursive --style .style.yapf --diff .
+  - yapf --parallel --verbose --recursive --style .style.yapf --exclude 'py37-mac' --diff .
   - pylint --max-line-length=120 *.py
   - python compile_city_comparison_csv.py
   - python -m pytest tests
