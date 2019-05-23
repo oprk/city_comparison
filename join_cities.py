@@ -7,7 +7,8 @@ from abc import ABC, abstractmethod
 import collections
 import pandas
 
-FuzzyMatchingKey = collections.namedtuple('FuzzyMatchingKey', ['state', 'city', 'population'])
+FuzzyMatchingKey = collections.namedtuple('FuzzyMatchingKey',
+                                          ['state', 'city', 'population'])
 
 
 class DataTable(ABC):
@@ -47,9 +48,10 @@ class DataTable(ABC):
     pass
 
   def join_exact_matching(self, data_table):
-    data = self._data.merge(
-      data_table.data, on=self.__class__.get_exact_matching_key(), how='outer',
-      suffixes=[self.suffix, data_table.suffix])
+    data = self._data.merge(data_table.data,
+                            on=self.__class__.get_exact_matching_key(),
+                            how='outer',
+                            suffixes=[self.suffix, data_table.suffix])
     return self.__class__(data)
 
   @staticmethod
@@ -77,10 +79,9 @@ class DataTable(ABC):
     Returns:
       FuzzyMatchingKey.
     """
-    return FuzzyMatchingKey(
-      state=row[cls.get_state_key()],
-      city=row[cls.get_city_key()],
-      population=row[cls.get_population_key()])
+    return FuzzyMatchingKey(state=row[cls.get_state_key()],
+                            city=row[cls.get_city_key()],
+                            population=row[cls.get_population_key()])
 
   @staticmethod
   def compare_keys(key1, key2):
@@ -104,7 +105,9 @@ class DataTable(ABC):
         # Consider cities equal.
         # Sanity check that populations are within 5% of each other.
         if (abs(key1.population - key2.population) / key2.population) > 0.05:
-          raise ValueError('Population measurements of the same city should be within 5% of each other.')
+          raise ValueError(
+              'Population measurements of the same city should be within 5% of each other.'
+          )
         return 0
       if key1.city < key2.city:
         return -1
@@ -112,12 +115,16 @@ class DataTable(ABC):
         return 1
 
   def join_fuzzy_matching(self, data_table):
-    keys_a = [self.get_state_key(),
-              self.get_city_key(),
-              self.get_population_key()]
-    keys_a = [data_table.get_state_key(),
-              data_table.get_city_key(),
-              data_table.get_population_key()]
+    keys_a = [
+        self.get_state_key(),
+        self.get_city_key(),
+        self.get_population_key()
+    ]
+    keys_a = [
+        data_table.get_state_key(),
+        data_table.get_city_key(),
+        data_table.get_population_key()
+    ]
     rows_a = data_table.sort_values(by=keys_a)
     rows_b = self._data.sort_values(by=keys_b)
     i_a = 0
@@ -139,7 +146,7 @@ class DataTable(ABC):
       else:
         # Keys match.
         merged_result.append(
-          row_a.join(row_b, lsuffix=self.suffix, rsuffix=data_table.suffix))
+            row_a.join(row_b, lsuffix=self.suffix, rsuffix=data_table.suffix))
         i_a += 1
         i_b += 1
     return self._class__(merged_result)
