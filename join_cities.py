@@ -120,7 +120,7 @@ class DataTable(ABC):
         self.get_city_key(),
         self.get_population_key()
     ]
-    keys_a = [
+    keys_b = [
         data_table.get_state_key(),
         data_table.get_city_key(),
         data_table.get_population_key()
@@ -133,8 +133,8 @@ class DataTable(ABC):
     while i_a < len(rows_a) and i_b < len(rows_b):
       row_a = rows_a.iloc[i_a, :]
       row_b = rows_b.iloc[i_b, :]
-      p = DataTable.compare_keys(get_fuzzy_matching_key(row_a),
-                                 get_fuzzy_matching_key(row_b))
+      p = DataTable.compare_keys(self.__class__.get_fuzzy_matching_key(row_a),
+                                 self.__class__.get_fuzzy_matching_key(row_b))
       if p < 0:
         # row_a is too small to match row_b.
         merged_result.append(row_a)
