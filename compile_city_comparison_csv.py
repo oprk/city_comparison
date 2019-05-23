@@ -6,10 +6,13 @@ import collections
 import csv
 import json
 
-_CENSUS_CSV = 'data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv'
+_CENSUS_CSV = 'data/census.gov/census_combined_data.csv'
 _OUTPUT_CSV = './cities_comparison.csv'
 _CENSUS_HEADERS_KEPT = [
-    'April 1, 2010 - Census', 'Population Estimate (as of July 1) - 2017'
+    'April 1, 2010 - Census census_2017',
+    'Population Estimate (as of July 1) - 2017 census_2017',
+    'Area in square miles - Land area census_2010',
+    'Area in square miles - Land area census_2010'
 ]
 _FBI_HEADERS_KEPT = [
     'Murder and nonnegligent manslaughter', 'Violent crime', 'Property crime'
@@ -45,7 +48,8 @@ def get_census_row(city):
   """ This method returns only the column headers you want for census. """
   # Split the "city, state" name into two fields.
   row = collections.OrderedDict()
-  row['city'], row['state'] = city['Geography'].lower().split(', ')
+  row['city'], row['state'] = city['Geography.2 census_2017'].lower().split(
+      ', ')
   # The Census data city names often end with 'city', such as 'New York City
   # City', even when it's redundant.  The FBI data doesn't append 'city' in this
   # way, so let's strip ' city' off the end.
@@ -59,7 +63,7 @@ def get_city_population_from_census_row(row):
   """ Get the 2017 population integer """
   # 'Population Estimate (as of July 1) - 2017' is a header from the Census
   # table.
-  return int(dict(row)['Population Estimate (as of July 1) - 2017'])
+  return int(dict(row)['Population Estimate (as of July 1) - 2017 census_2017'])
 
 
 def get_state_city_name(row):
@@ -112,7 +116,6 @@ def get_aggregated_csv_data():
   with open(_CENSUS_CSV) as csv_file:
     # Skip the first line of the census data, because we know it is junk, and
     # the second line is actually the header we care about.
-    next(csv_file)
     reader = csv.DictReader(csv_file, delimiter=',', quotechar='"')
     for city in reader:
       # clean up census csv, only keep the columns from: _CENSUS_HEADERS_KEPT

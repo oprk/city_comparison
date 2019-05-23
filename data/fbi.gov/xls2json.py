@@ -9,21 +9,11 @@ import xlrd
 
 FBI_DICT = {}
 
-STATES_CITIES_DICT = {}
-
-
-def add_city_to_dict(city_name, state_name):
-  if state_name not in STATES_CITIES_DICT:
-    STATES_CITIES_DICT[state_name] = []
-  STATES_CITIES_DICT[state_name].append(city_name)
-
 
 def write_json_files():
+  """ Take FBI_DICT constant, and write it to a json file """
   with open('fbi_cities_crime_2017.json', 'w') as file_handler:
     json.dump(FBI_DICT, file_handler)
-
-  with open('fbi_states_cities.json', 'w') as file_handler:
-    json.dump(STATES_CITIES_DICT, file_handler)
 
 
 def convert_xls_to_json(xls_file):
@@ -61,7 +51,6 @@ def convert_xls_to_json(xls_file):
           'xls_dict_row': xls_dict_row,
           'population': int(row_values[2]),
       }
-      add_city_to_dict(city_name, state_name)
   write_json_files()
 
 

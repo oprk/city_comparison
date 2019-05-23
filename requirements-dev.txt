@@ -4,3 +4,4 @@ pandas
 pylint
 yapf
 xlrd
+pytest
