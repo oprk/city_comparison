@@ -12,6 +12,7 @@ FuzzyMatchingKey = collections.namedtuple('FuzzyMatchingKey',
 
 
 class DataTable(ABC):
+  """Data table where each row is statistics for a city."""
 
   def __init__(self, data=None, file_path=None, suffix=''):
     """
@@ -31,23 +32,26 @@ class DataTable(ABC):
 
   @property
   def suffix(self):
+    """Suffix to apply to this table's fields when joining with other tables."""
     return self._suffix
 
   @property
   def data(self):
+    """Data represented as pandas DataFrame."""
     return self._data
 
   @staticmethod
   @abstractmethod
   def read(file_path):
-    pass
+    """Read data from file and return as pandas DataFrame."""
 
   @staticmethod
   @abstractmethod
   def get_exact_matching_key():
-    pass
+    """Key to use for exact matching."""
 
   def join_exact_matching(self, data_table):
+    """Join with another DataTable of the same type using exact matching."""
     data = self._data.merge(data_table.data,
                             on=self.__class__.get_exact_matching_key(),
                             how='outer',
@@ -57,17 +61,17 @@ class DataTable(ABC):
   @staticmethod
   @abstractmethod
   def get_state_key():
-    pass
+    """Key for `state` name."""
 
   @staticmethod
   @abstractmethod
   def get_city_key():
-    pass
+    """Key for `city` name."""
 
   @staticmethod
   @abstractmethod
   def get_population_key():
-    pass
+    """Key for `population`."""
 
   @classmethod
   def get_fuzzy_matching_key(cls, row):
@@ -96,25 +100,26 @@ class DataTable(ABC):
     """
     if key1.state < key2.state:
       return -1
-    elif key1.state > key2.state:
+    if key1.state > key2.state:
       return 1
-    else:
-      # States are equal.  Now match cities.  Is one city name prefix of the
-      # other?
-      if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
-        # Consider cities equal.
-        # Sanity check that populations are within 5% of each other.
-        if (abs(key1.population - key2.population) / key2.population) > 0.05:
-          raise ValueError(
-              'Population measurements of the same city should be within 5% of each other.'
-          )
-        return 0
-      if key1.city < key2.city:
-        return -1
-      elif key1.city > key2.city:
-        return 1
+    # States are equal.  Now match cities.  Is one city name prefix of the
+    # other?
+    if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
+      # Consider cities equal.
+      # Sanity check that populations are within 5% of each other.
+      if (abs(key1.population - key2.population) / key2.population) > 0.05:
+        raise ValueError(
+            'Population measurements of the same city should be within 5% of each other.'
+        )
+      return 0
+    if key1.city < key2.city:
+      return -1
+    if key1.city > key2.city:
+      return 1
+    return 0
 
   def join_fuzzy_matching(self, data_table):
+    """Join with another DataTable of different type using fuzzy matching."""
     keys_a = [
         self.get_state_key(),
         self.get_city_key(),
@@ -133,13 +138,14 @@ class DataTable(ABC):
     while i_a < len(rows_a) and i_b < len(rows_b):
       row_a = rows_a.iloc[i_a, :]
       row_b = rows_b.iloc[i_b, :]
-      p = DataTable.compare_keys(self.__class__.get_fuzzy_matching_key(row_a),
-                                 self.__class__.get_fuzzy_matching_key(row_b))
-      if p < 0:
+      compare = DataTable.compare_keys(
+          self.__class__.get_fuzzy_matching_key(row_a),
+          self.__class__.get_fuzzy_matching_key(row_b))
+      if compare < 0:
         # row_a is too small to match row_b.
         merged_result.append(row_a)
         i_a += 1
-      elif p > 0:
+      elif compare > 0:
         # row_b is too small to match row_a:
         merged_result.append(row_b)
         i_b += 1
@@ -149,38 +155,57 @@ class DataTable(ABC):
             row_a.join(row_b, lsuffix=self.suffix, rsuffix=data_table.suffix))
         i_a += 1
         i_b += 1
-    return self._class__(merged_result)
+    return self.__class__(merged_result)
 
   def join(self, data_table):
+    """Join with another DataTable.
+
+    Dispatches to use either "exact" or "fuzzy" matching based on whether
+    DataTables are of the same type.
+
+    Args:
+      data_table: DataTable.
+
+    Returns:
+      DataTable.
+    """
+
     # If same class, join exact.
     if isinstance(data_table, self.__class__):
       return self.join_exact_matching(data_table)
-    else:
-      return self.join_fuzzy_matching(data_table)
+    return self.join_fuzzy_matching(data_table)
 
 
 class Fbi(DataTable):
+  """Table of FBI data."""
 
+  @staticmethod
   def read(file_path):
     return pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
 
+  @staticmethod
   def get_exact_matching_key():
     # By returning `None` as key, we use `index` as key.
     return None
 
+  @staticmethod
   def get_state_key():
     return 'State'
 
+  @staticmethod
   def get_city_key():
     return 'City'
 
+  @staticmethod
   def get_population_key():
     return 'Population'
 
 
 class Census(DataTable):
+  """Table of Census data."""
 
-  def read(self, file_path):
+  @staticmethod
+  def read(file_path):
     """Census data is stored as CSV.
 
     Args:
@@ -191,14 +216,18 @@ class Census(DataTable):
     """
     return pandas.read_csv(file_path, encoding='ISO-8859-1')
 
+  @staticmethod
   def get_exact_matching_key():
     return 'GC_RANK.target-geo-id2'
 
+  @staticmethod
   def get_state_key():
     return 'state'
 
+  @staticmethod
   def get_city_key():
     return 'city'
 
+  @staticmethod
   def get_population_key():
     return 'Population Estimate (as of July 1) - 2017'
