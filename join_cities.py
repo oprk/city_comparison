@@ -208,10 +208,10 @@ class Fbi(DataTable):
 
   @staticmethod
   def read(file_path):
-    df = pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
+    data = pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
     # Turn default index into a column named 'index'.
-    df.reset_index(inplace=True)
-    return df
+    data.reset_index(inplace=True)
+    return data
 
   @staticmethod
   def get_exact_matching_key():
