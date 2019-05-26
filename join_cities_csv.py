@@ -1,7 +1,8 @@
 """Join Census and FBI data into one combined pandas DataFrame."""
 
 import pandas
-import join_cities as jc
+from data_table_census import Census as census_data_table
+from data_table_fbi import Fbi as fbi_data_table
 
 
 def debug_print_dataframe(data, num_rows=2, debug=False):
@@ -18,13 +19,13 @@ def main():
   # Set to True to print out 2 rows out of each dataframe.
   debug = False
 
-  census_population_2017_table = jc.Census(
+  census_population_2017_table = census_data_table(
       file_path='data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv', suffix='')
 
   print('census_population_2017_table.data:\n',
         len(census_population_2017_table.data))
 
-  census_geography_2010_table = jc.Census(
+  census_geography_2010_table = census_data_table(
       file_path='data/census/DEC_10_SF1_GCTPH1.US13PR_with_ann.csv',
       suffix='_census_geo')
 
@@ -36,7 +37,7 @@ def main():
   print('combined_census_table.data:\n', len(combined_census_table.data))
   debug_print_dataframe(combined_census_table.data, debug=debug)
 
-  fbi_crime_table = jc.Fbi(
+  fbi_crime_table = fbi_data_table(
       file_path=
       'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls',
       suffix='_fbi_crime')

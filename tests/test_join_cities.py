@@ -1,4 +1,7 @@
-import join_cities as jc
+from data_table_census import Census as census_data_table
+from data_table_fbi import Fbi as fbi_data_table
+from data_table import FuzzyMatchingKey
+
 import pandas
 import unittest
 
@@ -6,16 +9,16 @@ import unittest
 class TestFbi(unittest.TestCase):
 
   def test_get_exact_matching_key(self):
-    self.assertEqual(jc.Fbi.get_exact_matching_key(), 'index')
+    self.assertEqual(fbi_data_table.get_exact_matching_key(), 'index')
 
   def test_get_state_key(self):
-    self.assertEqual(jc.Fbi.get_state_key(), 'state')
+    self.assertEqual(fbi_data_table.get_state_key(), 'state')
 
   def test_get_city_key(self):
-    self.assertEqual(jc.Fbi.get_city_key(), 'city')
+    self.assertEqual(fbi_data_table.get_city_key(), 'city')
 
   def test_get_population_key(self):
-    self.assertEqual(jc.Fbi.get_population_key(), 'population')
+    self.assertEqual(fbi_data_table.get_population_key(), 'population')
 
   def test_get_fuzzy_matching_key(self):
     df = pandas.DataFrame(
@@ -28,42 +31,38 @@ class TestFbi(unittest.TestCase):
             'City': 'ignored'
         },
         index=[0])
-    fbi_table = jc.Fbi(data=df)
+    fbi_table = fbi_data_table(data=df)
     self.assertEqual(
         fbi_table.get_fuzzy_matching_key(df.iloc[0]),
-        jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=100))
+        FuzzyMatchingKey(state='CA', city='Sunnyvale', population=100))
 
   def test_compare_keys_equal(self):
-    key1 = jc.FuzzyMatchingKey(state='CA',
-                               city='Sunnyvale City',
-                               population=100)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
-    self.assertEqual(jc.Fbi.compare_keys(key1, key2), 0)
+    key1 = FuzzyMatchingKey(state='CA', city='Sunnyvale City', population=100)
+    key2 = FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
+    self.assertEqual(fbi_data_table.compare_keys(key1, key2), 0)
 
   def test_compare_keys_equal_wrong_population(self):
-    key1 = jc.FuzzyMatchingKey(state='CA',
-                               city='Sunnyvale City',
-                               population=100)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=200)
-    self.assertEquals(jc.Fbi.compare_keys(key1, key2), 1)
+    key1 = FuzzyMatchingKey(state='CA', city='Sunnyvale City', population=100)
+    key2 = FuzzyMatchingKey(state='CA', city='Sunnyvale', population=200)
+    self.assertEquals(fbi_data_table.compare_keys(key1, key2), 1)
 
   def test_compare_keys_city_less_than(self):
-    key1 = jc.FuzzyMatchingKey(state='CA', city='Mountain View', population=1)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
-    self.assertEqual(jc.Fbi.compare_keys(key1, key2), -1)
+    key1 = FuzzyMatchingKey(state='CA', city='Mountain View', population=1)
+    key2 = FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
+    self.assertEqual(fbi_data_table.compare_keys(key1, key2), -1)
 
   def test_compare_keys_state_less_than(self):
-    key1 = jc.FuzzyMatchingKey(state='AL', city='Montgomery', population=1)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
-    self.assertEqual(jc.Fbi.compare_keys(key1, key2), -1)
+    key1 = FuzzyMatchingKey(state='AL', city='Montgomery', population=1)
+    key2 = FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
+    self.assertEqual(fbi_data_table.compare_keys(key1, key2), -1)
 
   def test_compare_keys_population_less_than(self):
-    key1 = jc.FuzzyMatchingKey(state='CA', city='Mountain View', population=1)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
-    self.assertEqual(jc.Fbi.compare_keys(key1, key2), -1)
+    key1 = FuzzyMatchingKey(state='CA', city='Mountain View', population=1)
+    key2 = FuzzyMatchingKey(state='CA', city='Sunnyvale', population=102)
+    self.assertEqual(fbi_data_table.compare_keys(key1, key2), -1)
 
   def test_read(self):
-    df = jc.Fbi.read(
+    df = fbi_data_table.read(
         'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
     )
     self.assertEqual(len(df), 9589)
@@ -80,11 +79,11 @@ class TestFbi(unittest.TestCase):
             'city': 'ignored'
         },
         index=[0])
-    fbi_table = jc.Fbi(data=df)
+    fbi_table = fbi_data_table(data=df)
     self.assertTrue(fbi_table.data.equals(df))
 
   def test_init_from_file(self):
-    fbi_table = jc.Fbi(
+    fbi_table = fbi_data_table(
         file_path=
         'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
     )
@@ -111,8 +110,8 @@ class TestFbi(unittest.TestCase):
         },
         index=[0, 1])
 
-    fbi_table1 = jc.Fbi(data=fbi_data1, suffix='_table1')
-    fbi_table2 = jc.Fbi(data=fbi_data2, suffix='_table2')
+    fbi_table1 = fbi_data_table(data=fbi_data1, suffix='_table1')
+    fbi_table2 = fbi_data_table(data=fbi_data2, suffix='_table2')
     # Note that the indices,
     # index=['california_sunnyvale', 'alabama_montgomery']
     # will be ignored.
@@ -136,16 +135,17 @@ class TestFbi(unittest.TestCase):
 class TestCensus(unittest.TestCase):
 
   def test_get_exact_matching_key(self):
-    self.assertEqual(jc.Census.get_exact_matching_key(), 'Target Geo Id2')
+    self.assertEqual(census_data_table.get_exact_matching_key(),
+                     'Target Geo Id2')
 
   def test_get_state_key(self):
-    self.assertEqual(jc.Census.get_state_key(), 'state')
+    self.assertEqual(census_data_table.get_state_key(), 'state')
 
   def test_get_city_key(self):
-    self.assertEqual(jc.Census.get_city_key(), 'city')
+    self.assertEqual(census_data_table.get_city_key(), 'city')
 
   def test_get_population_key(self):
-    self.assertEqual(jc.Census.get_population_key(),
+    self.assertEqual(census_data_table.get_population_key(),
                      'Population Estimate (as of July 1) - 2017')
 
   def test_get_fuzzy_matching_key(self):
@@ -159,13 +159,14 @@ class TestCensus(unittest.TestCase):
             'City': 'ignored'
         },
         index=[0])
-    census_table = jc.Census(data=df)
+    census_table = census_data_table(data=df)
     self.assertEqual(
         census_table.get_fuzzy_matching_key(df.iloc[0]),
-        jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=100))
+        FuzzyMatchingKey(state='CA', city='Sunnyvale', population=100))
 
   def test_read(self):
-    df = jc.Census.read('data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
+    df = census_data_table.read(
+        'data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
     self.assertEqual(len(df), 769)
 
   def test_init_from_data(self):
@@ -180,11 +181,11 @@ class TestCensus(unittest.TestCase):
             'City': 'ignored'
         },
         index=[0])
-    census_table = jc.Census(data=df)
+    census_table = census_data_table(data=df)
     self.assertTrue(census_table.data.equals(df))
 
   def test_init_from_file(self):
-    census_table = jc.Census(
+    census_table = census_data_table(
         file_path='data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
     self.assertEqual(len(census_table.data), 769)
 
@@ -207,8 +208,8 @@ class TestCensus(unittest.TestCase):
             'Population Estimate (as of July 1) - 2017': [200, 100],
         },
         index=[0, 1])
-    census_table1 = jc.Census(data=census_data1, suffix='_table1')
-    census_table2 = jc.Census(data=census_data2, suffix='_table2')
+    census_table1 = census_data_table(data=census_data1, suffix='_table1')
+    census_table2 = census_data_table(data=census_data2, suffix='_table2')
     # Notice that the overlapping columns are duplicated, with suffix '_table1'
     # and '_table2'.
     expected_data = pandas.DataFrame({
@@ -253,11 +254,11 @@ class TestFuzzyMatching(unittest.TestCase):
         },
         index=[0, 1, 2])
 
-    fbi_table1 = jc.Fbi(data=fbi_data1, suffix='_fbi')
-    census_table2 = jc.Census(data=census_data2, suffix='_census')
+    fbi_table1 = fbi_data_table(data=fbi_data1, suffix='_fbi')
+    census_table2 = census_data_table(data=census_data2, suffix='_census')
     joined_table = fbi_table1.join_fuzzy_matching(census_table2)
     # The output table from matching should be the same class as the left table.
-    self.assertTrue(isinstance(joined_table, jc.Fbi))
+    self.assertTrue(isinstance(joined_table, fbi_data_table))
     actual_data = joined_table.data.sort_index(axis=1)
     expected_data = pandas.DataFrame({
         'city_fbi': ['Montgomery', 'Sunnyvale'],
