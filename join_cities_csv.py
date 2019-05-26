@@ -48,6 +48,9 @@ def main():
   print('combined_table.data: ', len(combined_table.data))
   debug_print_dataframe(combined_table.data, debug=debug)
 
+  # Write the combined dataframe table to the final csv file.
+  combined_table.data.to_csv('city_comparison.csv')
+
 
 if __name__ == '__main__':
   main()
