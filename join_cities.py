@@ -104,8 +104,11 @@ class DataTable(ABC):
       return -1
     if key1.state > key2.state:
       return 1
-    # States are equal.  Now match cities.  Is one city name prefix of the
-    # other?
+    # States are equal.  Now match cities.
+    if key1.city == key2.city:
+      # Assume cities with the same name are the same city.
+      return 0
+    # Is one city name prefix of the other?
     if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
       # Might be the same city.
       # Sanity check that populations are within 5% of each other.
@@ -227,7 +230,7 @@ class Fbi(DataTable):
 
     # Replace the '\n' in header names and make lower_case:
     # "Murder and\nnonnegligent\nmanslaughter" =>
-    # "murder_and_nonnegligent_manslaughter"
+    # "murder and nonnegligent manslaughter"
     def normalize_header(header):
       return header.lower().replace('\n', ' ')
 
