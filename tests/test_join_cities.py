@@ -64,7 +64,7 @@ class TestFbi(unittest.TestCase):
 
   def test_read(self):
     df = jc.Fbi.read(
-        'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
+        'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
     )
     self.assertEqual(len(df), 9589)
 
@@ -86,7 +86,7 @@ class TestFbi(unittest.TestCase):
   def test_init_from_file(self):
     fbi_table = jc.Fbi(
         file_path=
-        'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
+        'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
     )
     self.assertEqual(len(fbi_table.data), 9589)
 
@@ -165,8 +165,7 @@ class TestCensus(unittest.TestCase):
         jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=100))
 
   def test_read(self):
-    df = jc.Census.read(
-        'data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
+    df = jc.Census.read('data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
     self.assertEqual(len(df), 769)
 
   def test_init_from_data(self):
@@ -186,7 +185,7 @@ class TestCensus(unittest.TestCase):
 
   def test_init_from_file(self):
     census_table = jc.Census(
-        file_path='data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
+        file_path='data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv')
     self.assertEqual(len(census_table.data), 769)
 
   def test_join_exact_matching(self):
