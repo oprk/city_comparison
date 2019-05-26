@@ -112,9 +112,12 @@ class DataTable(ABC):
     if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
       # Might be the same city.
       # Sanity check that populations are within 5% of each other.
-      if (abs(key1.population - key2.population) / key2.population) > 0.1:
-        print('Population too different (> 10%) to be the same city, continue:',
-              key1, key2)
+      population_difference = (abs(key1.population - key2.population) /
+                               key2.population)
+      if population_difference > 0.1:
+        print(
+            'Population too different ({percent}%) to be the same city, continue:'
+            .format(percent=round(population_difference * 100)), key1, key2)
         # Probably just a coincidence that the cities begin with the same name,
         # if the populations are off by that much.
         if key1.city < key2.city:
@@ -166,9 +169,9 @@ class DataTable(ABC):
       row_a.reset_index(inplace=True, drop=True)
       row_b.reset_index(inplace=True, drop=True)
 
-      compare = DataTable.compare_keys(
-          self.__class__.get_fuzzy_matching_key(row_a.iloc[0]),
-          data_table.get_fuzzy_matching_key(row_b.iloc[0]))
+      key_a = self.__class__.get_fuzzy_matching_key(row_a.iloc[0])
+      key_b = data_table.get_fuzzy_matching_key(row_b.iloc[0])
+      compare = DataTable.compare_keys(key_a, key_b)
       if compare < 0:
         # row_a is too small to match row_b.
         # merged_result = merged_result.append(row_a, sort=True)
