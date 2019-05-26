@@ -130,31 +130,58 @@ class DataTable(ABC):
         data_table.get_city_key(),
         data_table.get_population_key()
     ]
-    rows_a = data_table.sort_values(by=keys_a)
-    rows_b = self._data.sort_values(by=keys_b)
+    rows_a = self._data.sort_values(by=keys_a)
+    rows_b = data_table.data.sort_values(by=keys_b)
+    rows_a.reset_index(inplace=True, drop=True)
+    rows_b.reset_index(inplace=True, drop=True)
     i_a = 0
     i_b = 0
     merged_result = pandas.DataFrame()
     while i_a < len(rows_a) and i_b < len(rows_b):
-      row_a = rows_a.iloc[i_a, :]
-      row_b = rows_b.iloc[i_b, :]
+      row_a = rows_a[i_a:i_a + 1]
+      row_b = rows_b[i_b:i_b + 1]
+      # Keys match.  Drop the indices in `row_a` and `row_b` so they both have
+      # index `0` for concatenation.
+      row_a.reset_index(inplace=True, drop=True)
+      row_b.reset_index(inplace=True, drop=True)
+
       compare = DataTable.compare_keys(
-          self.__class__.get_fuzzy_matching_key(row_a),
-          self.__class__.get_fuzzy_matching_key(row_b))
+          self.__class__.get_fuzzy_matching_key(row_a.iloc[0]),
+          data_table.get_fuzzy_matching_key(row_b.iloc[0]))
       if compare < 0:
         # row_a is too small to match row_b.
-        merged_result.append(row_a)
+        merged_result = merged_result.append(row_a, sort=True)
         i_a += 1
       elif compare > 0:
         # row_b is too small to match row_a:
-        merged_result.append(row_b)
+        merged_result = merged_result.append(row_b, sort=True)
         i_b += 1
       else:
-        # Keys match.
-        merged_result.append(
-            row_a.join(row_b, lsuffix=self.suffix, rsuffix=data_table.suffix))
+        merge_rows = pandas.concat([row_a, row_b], axis=1, sort=True)
+        merged_result = merged_result.append(merge_rows,
+                                             ignore_index=True,
+                                             sort=True)
         i_a += 1
         i_b += 1
+
+    # There may be some stragglers.
+    while i_a < len(rows_a):
+      row_a = rows_a[i_a:i_a + 1]
+      row_a.reset_index(inplace=True, drop=True)
+      merged_result = merged_result.append(row_a, sort=True)
+      i_a += 1
+
+    while i_b < len(rows_b):
+      row_b = rows_b[i_b:i_b + 1]
+      row_b.reset_index(inplace=True, drop=True)
+      merged_result = merged_result.append(row_b, sort=True)
+      i_b += 1
+
+    # Drop the indices in `merged_result`, because they don't mean anything either.
+    merged_result.reset_index(inplace=True, drop=True)
+    # NaNs are difficult to deal with.  Replace with 0 instead.
+    merged_result = merged_result.fillna(0)
+
     return self.__class__(merged_result)
 
   def join(self, data_table):
@@ -181,12 +208,16 @@ class Fbi(DataTable):
 
   @staticmethod
   def read(file_path):
-    return pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
+    df = pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
+    # Turn default index into a column named 'index'.
+    df.reset_index(inplace=True)
+    return df
 
   @staticmethod
   def get_exact_matching_key():
     # By returning `None` as key, we use `index` as key.
-    return None
+    # return None
+    return 'index'
 
   @staticmethod
   def get_state_key():
@@ -214,11 +245,12 @@ class Census(DataTable):
     Returns:
       Pandas dataframe.
     """
-    return pandas.read_csv(file_path, encoding='ISO-8859-1')
+    # header=1 skips line 0 and uses line 1 as the header.
+    return pandas.read_csv(file_path, encoding='ISO-8859-1', header=1)
 
   @staticmethod
   def get_exact_matching_key():
-    return 'GC_RANK.target-geo-id2'
+    return 'Target Geo Id'
 
   @staticmethod
   def get_state_key():
