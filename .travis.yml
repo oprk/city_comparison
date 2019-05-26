@@ -1,6 +1,7 @@
 language: python
 cache: pip
 python:
+  # note, travis only has 3.6 as the latest. We should check back later to upgrade to 3.7
   - "3.6"
 install:
   - pip install -r requirements-dev.txt
