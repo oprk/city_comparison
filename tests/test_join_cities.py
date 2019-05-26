@@ -88,7 +88,7 @@ class TestFbi(unittest.TestCase):
     self.assertEqual(len(fbi_table.data), 9577)
 
   def test_join_exact_matching(self):
-    fbi_table1 = jc.Fbi(data=pandas.DataFrame(
+    fbi_data1 = pandas.DataFrame(
         {
             'index': ['california_sunnyvale', 'alabama_montgomery'],
             'foo': [1, 2],
@@ -96,9 +96,9 @@ class TestFbi(unittest.TestCase):
             'City': ['Sunnyvale', 'Montgomery'],
             'Population': [100, 200],
         },
-        index=[0, 1]),
-                        suffix='_table1')
-    fbi_table2 = jc.Fbi(data=pandas.DataFrame(
+        index=[0, 1])
+
+    fbi_data2 = pandas.DataFrame(
         {
             'index': ['alabama_montgomery', 'california_sunnyvale'],
             'bar': [3, 4],
@@ -106,8 +106,10 @@ class TestFbi(unittest.TestCase):
             'City': ['Montgomery', 'Sunnyvale'],
             'Population': [200, 100],
         },
-        index=[0, 1]),
-                        suffix='_table2')
+        index=[0, 1])
+
+    fbi_table1 = jc.Fbi(data=fbi_data1, suffix='_table1')
+    fbi_table2 = jc.Fbi(data=fbi_data2, suffix='_table2')
     # Note that the indices,
     # index=['california_sunnyvale', 'alabama_montgomery']
     # will be ignored.
@@ -185,7 +187,7 @@ class TestCensus(unittest.TestCase):
     self.assertEqual(len(census_table.data), 769)
 
   def test_join_exact_matching(self):
-    census_table1 = jc.Census(data=pandas.DataFrame(
+    census_data1 = pandas.DataFrame(
         {
             'foo': [1, 2],
             'state': ['CA', 'AL'],
@@ -193,9 +195,8 @@ class TestCensus(unittest.TestCase):
             'Target Geo Id': ['1620000US0677000', '1620000US0151000'],
             'Population Estimate (as of July 1) - 2017': [100, 200],
         },
-        index=[0, 1]),
-                              suffix='_table1')
-    census_table2 = jc.Census(data=pandas.DataFrame(
+        index=[0, 1])
+    census_data2 = pandas.DataFrame(
         {
             'bar': [3, 4],
             'state': ['AL', 'CA'],
@@ -203,8 +204,9 @@ class TestCensus(unittest.TestCase):
             'Target Geo Id': ['1620000US0151000', '1620000US0677000'],
             'Population Estimate (as of July 1) - 2017': [200, 100],
         },
-        index=[0, 1]),
-                              suffix='_table2')
+        index=[0, 1])
+    census_table1 = jc.Census(data=census_data1, suffix='_table1')
+    census_table2 = jc.Census(data=census_data2, suffix='_table2')
     # Notice that the overlapping columns are duplicated, with suffix '_table1'
     # and '_table2'.
     expected_data = pandas.DataFrame({
@@ -227,7 +229,7 @@ class TestCensus(unittest.TestCase):
 class TestFuzzyMatching(unittest.TestCase):
 
   def test_join_fuzzy_matching(self):
-    fbi_table1 = jc.Fbi(data=pandas.DataFrame(
+    fbi_data1 = pandas.DataFrame(
         {
             'foo': [1, 2, 3],
             'State': ['CA', 'AL', 'Hidden'],
@@ -238,9 +240,8 @@ class TestFuzzyMatching(unittest.TestCase):
                 'atlantas_lost_city'
             ],
         },
-        index=['california_sunnyvale', 'alabama_montgomery', 'atlantis']),
-                        suffix='_fbi')
-    census_table2 = jc.Census(data=pandas.DataFrame(
+        index=['california_sunnyvale', 'alabama_montgomery', 'atlantis'])
+    census_data2 = pandas.DataFrame(
         {
             'bar': [5, 3, 4],
             'state': ['Isle of Man', 'AL', 'CA'],
@@ -248,8 +249,10 @@ class TestFuzzyMatching(unittest.TestCase):
             'Target Geo Id': ['???', '1620000US0151000', '1620000US0677000'],
             'Population Estimate (as of July 1) - 2017': [1, 200, 100],
         },
-        index=[0, 1, 2]),
-                              suffix='_census')
+        index=[0, 1, 2])
+
+    fbi_table1 = jc.Fbi(data=fbi_data1, suffix='_fbi')
+    census_table2 = jc.Census(data=census_data2, suffix='_census')
     joined_table = fbi_table1.join_fuzzy_matching(census_table2)
     # The output table from matching should be the same class as the left table.
     self.assertTrue(isinstance(joined_table, jc.Fbi))
