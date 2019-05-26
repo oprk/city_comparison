@@ -19,14 +19,13 @@ def main():
   debug = False
 
   census_population_2017_table = jc.Census(
-      file_path='data/census.gov/PEP_2017_PEPANNRSIP.US12A_with_ann.csv',
-      suffix='')
+      file_path='data/census/PEP_2017_PEPANNRSIP.US12A_with_ann.csv', suffix='')
 
   print('census_population_2017_table.data:\n',
         len(census_population_2017_table.data))
 
   census_geography_2010_table = jc.Census(
-      file_path='data/census.gov/DEC_10_SF1_GCTPH1.US13PR_with_ann.csv',
+      file_path='data/census/DEC_10_SF1_GCTPH1.US13PR_with_ann.csv',
       suffix='_census_geo')
 
   print('census_geography_2010_table.data:\n',
@@ -39,7 +38,7 @@ def main():
 
   fbi_crime_table = jc.Fbi(
       file_path=
-      'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls',
+      'data/fbi/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls',
       suffix='_fbi_crime')
   print('fbi_crime_table.data: ', len(fbi_crime_table.data))
   debug_print_dataframe(fbi_crime_table.data, debug=debug)
