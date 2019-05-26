@@ -95,10 +95,9 @@ class DataTable(ABC):
     Perform fuzzy matching on keys.
 
     Returns:
-      -1 if key1 < key2
-      0 if key1 == key2
-      1 if key1 > key2
+      -1 if key1 < key2, 0 if key1 == key2, 1 if key1 > key2.
     """
+    # pylint: disable=too-many-return-statements
     # We assume the state names match identically.
     if key1.state < key2.state:
       return -1
@@ -112,18 +111,17 @@ class DataTable(ABC):
     if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
       # Might be the same city.
       # Sanity check that populations are within 5% of each other.
-      population_difference = (abs(key1.population - key2.population) /
-                               key2.population)
-      if population_difference > 0.1:
+      population_percentage_difference = round(
+          abs(key1.population - key2.population) / key2.population * 100)
+      if population_percentage_difference > 10:
         print(
             'Population too different ({percent}%) to be the same city, continue:'
-            .format(percent=round(population_difference * 100)), key1, key2)
+            .format(percent=population_percentage_difference), key1, key2)
         # Probably just a coincidence that the cities begin with the same name,
         # if the populations are off by that much.
         if key1.city < key2.city:
           return -1
-        else:
-          return 1
+        return 1
       # Cities are probably a match because they are in same state, begin with
       # the same prefix, have about the same population.
       return 0
@@ -144,6 +142,7 @@ class DataTable(ABC):
     Returns:
       DataTable of same class as left hand table.
     """
+    # pylint: disable=too-many-locals
     keys_a = [
         self.get_state_key(),
         self.get_city_key(),
@@ -244,8 +243,7 @@ class Fbi(DataTable):
     def remove_integers(str_val):
       if isinstance(str_val, str):
         return ''.join([i for i in str_val if not i.isdigit()]).lower()
-      else:
-        return str_val
+      return str_val
 
     def remove_integers_from_row(row):
       return pandas.Series(
@@ -257,7 +255,7 @@ class Fbi(DataTable):
     # Propagate 'state' column.
     state = None
     for i, row in data.iterrows():
-      if (pandas.notnull(row['state'])):
+      if pandas.notnull(row['state']):
         state = row['state']
       data.set_value(i, 'state', state)
 

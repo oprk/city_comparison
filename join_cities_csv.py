@@ -1,8 +1,11 @@
-import join_cities as jc
+"""Join Census and FBI data into one combined pandas DataFrame."""
+
 import pandas
+import join_cities as jc
 
 
 def debug_print_dataframe(data, num_rows=2, debug=False):
+  """If debug enabled, print a few rows from pandas DataFrame."""
   if debug:
     with pandas.option_context('display.max_rows', None, 'display.max_columns',
                                None):
