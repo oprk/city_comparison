@@ -9,23 +9,23 @@ class TestFbi(unittest.TestCase):
     self.assertEqual(jc.Fbi.get_exact_matching_key(), 'index')
 
   def test_get_state_key(self):
-    self.assertEqual(jc.Fbi.get_state_key(), 'State')
+    self.assertEqual(jc.Fbi.get_state_key(), 'state')
 
   def test_get_city_key(self):
-    self.assertEqual(jc.Fbi.get_city_key(), 'City')
+    self.assertEqual(jc.Fbi.get_city_key(), 'city')
 
   def test_get_population_key(self):
-    self.assertEqual(jc.Fbi.get_population_key(), 'Population')
+    self.assertEqual(jc.Fbi.get_population_key(), 'population')
 
   def test_get_fuzzy_matching_key(self):
     df = pandas.DataFrame(
         {
             'foo': 1,
-            'State': 'CA',
-            'City': 'Sunnyvale',
-            'Population': 100,
-            'state': 'ignored',
-            'city': 'ignored'
+            'state': 'CA',
+            'city': 'Sunnyvale',
+            'population': 100,
+            'State': 'ignored',
+            'City': 'ignored'
         },
         index=[0])
     fbi_table = jc.Fbi(data=df)
@@ -44,9 +44,8 @@ class TestFbi(unittest.TestCase):
     key1 = jc.FuzzyMatchingKey(state='CA',
                                city='Sunnyvale City',
                                population=100)
-    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=110)
-    with self.assertRaises(ValueError):
-      jc.Fbi.compare_keys(key1, key2)
+    key2 = jc.FuzzyMatchingKey(state='CA', city='Sunnyvale', population=200)
+    self.assertEquals(jc.Fbi.compare_keys(key1, key2), 1)
 
   def test_compare_keys_city_less_than(self):
     key1 = jc.FuzzyMatchingKey(state='CA', city='Mountain View', population=1)
@@ -64,9 +63,10 @@ class TestFbi(unittest.TestCase):
     self.assertEqual(jc.Fbi.compare_keys(key1, key2), -1)
 
   def test_read(self):
-    df = jc.Fbi.read('data/fbi.gov/fbi_cities_crime_2017.json')
-    # JSON file should contain 9577 rows.
-    self.assertEqual(len(df), 9577)
+    df = jc.Fbi.read(
+        'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
+    )
+    self.assertEqual(len(df), 9589)
 
   def test_init_from_data(self):
     # Test initializing an `Fbi` DataTable from pandas dataframe.
@@ -84,8 +84,11 @@ class TestFbi(unittest.TestCase):
     self.assertTrue(fbi_table.data.equals(df))
 
   def test_init_from_file(self):
-    fbi_table = jc.Fbi(file_path='data/fbi.gov/fbi_cities_crime_2017.json')
-    self.assertEqual(len(fbi_table.data), 9577)
+    fbi_table = jc.Fbi(
+        file_path=
+        'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls'
+    )
+    self.assertEqual(len(fbi_table.data), 9589)
 
   def test_join_exact_matching(self):
     fbi_data1 = pandas.DataFrame(
@@ -232,9 +235,9 @@ class TestFuzzyMatching(unittest.TestCase):
     fbi_data1 = pandas.DataFrame(
         {
             'foo': [1, 2, 3],
-            'State': ['CA', 'AL', 'Hidden'],
-            'City': ['Sunnyvale', 'Montgomery', 'Lost City'],
-            'Population': [100, 200, 300],
+            'state': ['CA', 'AL', 'Hidden'],
+            'city': ['Sunnyvale', 'Montgomery', 'Lost City'],
+            'population': [100, 200, 300],
             'index': [
                 'california_sunnyvale', 'alabama_montgomery',
                 'atlantas_lost_city'
@@ -258,17 +261,16 @@ class TestFuzzyMatching(unittest.TestCase):
     self.assertTrue(isinstance(joined_table, jc.Fbi))
     actual_data = joined_table.data.sort_index(axis=1)
     expected_data = pandas.DataFrame({
-        'City': ['Montgomery', 'Sunnyvale', 'Lost City', 0],
-        'Population': [200., 100., 300., 0.],
-        'Population Estimate (as of July 1) - 2017': [200., 100., 0., 1.],
-        'State': ['AL', 'CA', 'Hidden', 0],
-        'Target Geo Id2': ['1620000US0151000', '1620000US0677000', 0, '???'],
-        'bar': [3., 4., 0., 5.],
-        'foo': [2., 1., 3., 0.],
-        'city': ['Montgomery', 'Sunnyvale', 0, 'Avalon'],
-        'index':
-        ['alabama_montgomery', 'california_sunnyvale', 'atlantas_lost_city', 0],
-        'state': ['AL', 'CA', 0, 'Isle of Man'],
+        'city_fbi': ['Montgomery', 'Sunnyvale'],
+        'population': [200, 100],
+        'Population Estimate (as of July 1) - 2017': [200, 100],
+        'state_census': ['AL', 'CA'],
+        'Target Geo Id2': ['1620000US0151000', '1620000US0677000'],
+        'bar': [3, 4],
+        'foo': [2, 1],
+        'city_census': ['Montgomery', 'Sunnyvale'],
+        'index': ['alabama_montgomery', 'california_sunnyvale'],
+        'state_fbi': ['AL', 'CA'],
     }).sort_index(axis=1)
 
     self.assertTrue(expected_data.equals(actual_data))
