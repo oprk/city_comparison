@@ -2,6 +2,6 @@
 flake8
 pandas
 pylint
-yapf
-xlrd
 pytest
+yaml
+yapf
