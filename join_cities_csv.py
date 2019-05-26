@@ -22,23 +22,24 @@ def main():
   combined_census_table = (
       census_population_2017_table.join(census_geography_2010_table))
   print('combined_census_table.data:\n', len(combined_census_table.data))
-  with pandas.option_context('display.max_rows', None, 'display.max_columns',
-                             None):
-    print(combined_census_table.data[:2])
+  # with pandas.option_context('display.max_rows', None, 'display.max_columns',
+  #                            None):
+  #   print(combined_census_table.data[:2])
 
-  fbi_crime_table = jc.Fbi(file_path='data/fbi.gov/fbi_cities_crime_2017.json',
-                           suffix='_fbi_crime')
+  fbi_crime_table = jc.Fbi(
+      file_path=
+      'data/fbi.gov/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2017.xls',
+      suffix='_fbi_crime')
   print('fbi_crime_table.data: ', len(fbi_crime_table.data))
-  # print(type(fbi_crime_table.data.iloc[0]['xls_dict_row'])) => dict
-  # print(fbi_crime_table.data.iloc[0]['xls_dict_row'])
-  with pandas.option_context('display.max_rows', None, 'display.max_columns',
-                             None):
-    print(fbi_crime_table.data[:2])
+  # with pandas.option_context('display.max_rows', None, 'display.max_columns',
+  #                            None):
+  #   print(fbi_crime_table.data[:2])
 
   combined_table = combined_census_table.join(fbi_crime_table)
-  with pandas.option_context('display.max_rows', None, 'display.max_columns',
-                             None):
-    print('combined_table.data: ', len(combined_table.data))
+  print('combined_table.data: ', len(combined_table.data))
+  # with pandas.option_context('display.max_rows', None, 'display.max_columns',
+  #                            None):
+  #   print('combined_table.data: ', combined_table.data[:10])
 
 
 if __name__ == '__main__':
