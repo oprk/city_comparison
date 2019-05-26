@@ -52,10 +52,11 @@ class DataTable(ABC):
 
   def join_exact_matching(self, data_table):
     """Join with another DataTable of the same type using exact matching."""
-    data = self._data.merge(data_table.data,
-                            on=self.__class__.get_exact_matching_key(),
-                            how='outer',
-                            suffixes=[self.suffix, data_table.suffix])
+    key = self.__class__.get_exact_matching_key()
+    data = self.data.merge(data_table.data,
+                           on=key,
+                           how='inner',
+                           suffixes=[self.suffix, data_table.suffix])
     return self.__class__(data)
 
   @staticmethod
@@ -94,23 +95,35 @@ class DataTable(ABC):
     Perform fuzzy matching on keys.
 
     Returns:
-      -1 if key1 < key2
-      0 if key1 == key2
-      1 if key1 > key2
+      -1 if key1 < key2, 0 if key1 == key2, 1 if key1 > key2.
     """
+    # pylint: disable=too-many-return-statements
+    # We assume the state names match identically.
     if key1.state < key2.state:
       return -1
     if key1.state > key2.state:
       return 1
-    # States are equal.  Now match cities.  Is one city name prefix of the
-    # other?
+    # States are equal.  Now match cities.
+    if key1.city == key2.city:
+      # Assume cities with the same name are the same city.
+      return 0
+    # Is one city name prefix of the other?
     if (key1.city.startswith(key2.city)) or (key2.city.startswith(key1.city)):
-      # Consider cities equal.
+      # Might be the same city.
       # Sanity check that populations are within 5% of each other.
-      if (abs(key1.population - key2.population) / key2.population) > 0.05:
-        raise ValueError(
-            'Population measurements of the same city should be within 5% of each other.'
-        )
+      population_percentage_difference = round(
+          abs(key1.population - key2.population) / key2.population * 100)
+      if population_percentage_difference > 10:
+        print(
+            'Population too different ({percent}%) to be the same city, continue:'
+            .format(percent=population_percentage_difference), key1, key2)
+        # Probably just a coincidence that the cities begin with the same name,
+        # if the populations are off by that much.
+        if key1.city < key2.city:
+          return -1
+        return 1
+      # Cities are probably a match because they are in same state, begin with
+      # the same prefix, have about the same population.
       return 0
     if key1.city < key2.city:
       return -1
@@ -119,7 +132,17 @@ class DataTable(ABC):
     return 0
 
   def join_fuzzy_matching(self, data_table):
-    """Join with another DataTable of different type using fuzzy matching."""
+    """Join with another DataTable of different type using fuzzy matching.
+
+    We perform an 'inner' join, so rows that do not match will not be returned.
+
+    Args:
+      data_table: DataTable.
+
+    Returns:
+      DataTable of same class as left hand table.
+    """
+    # pylint: disable=too-many-locals
     keys_a = [
         self.get_state_key(),
         self.get_city_key(),
@@ -130,31 +153,53 @@ class DataTable(ABC):
         data_table.get_city_key(),
         data_table.get_population_key()
     ]
-    rows_a = data_table.sort_values(by=keys_a)
-    rows_b = self._data.sort_values(by=keys_b)
+    rows_a = self._data.sort_values(by=keys_a)
+    rows_b = data_table.data.sort_values(by=keys_b)
+    rows_a.reset_index(inplace=True, drop=True)
+    rows_b.reset_index(inplace=True, drop=True)
     i_a = 0
     i_b = 0
     merged_result = pandas.DataFrame()
     while i_a < len(rows_a) and i_b < len(rows_b):
-      row_a = rows_a.iloc[i_a, :]
-      row_b = rows_b.iloc[i_b, :]
-      compare = DataTable.compare_keys(
-          self.__class__.get_fuzzy_matching_key(row_a),
-          self.__class__.get_fuzzy_matching_key(row_b))
+      row_a = rows_a[i_a:i_a + 1]
+      row_b = rows_b[i_b:i_b + 1]
+      # Keys match.  Drop the indices in `row_a` and `row_b` so they both have
+      # index `0` for concatenation.
+      row_a.reset_index(inplace=True, drop=True)
+      row_b.reset_index(inplace=True, drop=True)
+
+      key_a = self.__class__.get_fuzzy_matching_key(row_a.iloc[0])
+      key_b = data_table.get_fuzzy_matching_key(row_b.iloc[0])
+      compare = DataTable.compare_keys(key_a, key_b)
       if compare < 0:
         # row_a is too small to match row_b.
-        merged_result.append(row_a)
+        # merged_result = merged_result.append(row_a, sort=True)
         i_a += 1
       elif compare > 0:
         # row_b is too small to match row_a:
-        merged_result.append(row_b)
+        # merged_result = merged_result.append(row_b, sort=True)
         i_b += 1
       else:
-        # Keys match.
-        merged_result.append(
-            row_a.join(row_b, lsuffix=self.suffix, rsuffix=data_table.suffix))
+        # By joining `on=None`, we join on `index`, which is 0 for both `row_a`
+        # and `row_b`.  If `row_a` and `row_b` have duplicate columns, suffixes
+        # will be added.
+        merge_rows = row_a.join(row_b,
+                                on=None,
+                                how='inner',
+                                lsuffix=self.suffix,
+                                rsuffix=data_table.suffix,
+                                sort=False)
+        merged_result = merged_result.append(merge_rows,
+                                             ignore_index=True,
+                                             sort=True)
         i_a += 1
         i_b += 1
+
+    # Drop the indices in `merged_result`, because they don't mean anything either.
+    merged_result.reset_index(inplace=True, drop=True)
+    # NaNs are difficult to deal with.  Replace with 0 instead.
+    merged_result = merged_result.fillna(0)
+
     return self.__class__(merged_result)
 
   def join(self, data_table):
@@ -181,24 +226,58 @@ class Fbi(DataTable):
 
   @staticmethod
   def read(file_path):
-    return pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
+    data = pandas.read_excel(file_path, header=3)
+    # Remove empty columns.
+    data.drop(data.columns[[13, 14, 15, 16, 17, 18]], axis=1, inplace=True)
+
+    # Replace the '\n' in header names and make lower_case:
+    # "Murder and\nnonnegligent\nmanslaughter" =>
+    # "murder and nonnegligent manslaughter"
+    def normalize_header(header):
+      return header.lower().replace('\n', ' ')
+
+    data = data.rename(columns=normalize_header)
+
+    # Remove integers from 'city' and 'state' column values.  Also make
+    # everything lowercase.
+    def remove_integers(str_val):
+      if isinstance(str_val, str):
+        return ''.join([i for i in str_val if not i.isdigit()]).lower()
+      return str_val
+
+    def remove_integers_from_row(row):
+      return pandas.Series(
+          [remove_integers(row['city']),
+           remove_integers(row['state'])])
+
+    data[['city', 'state']] = data.apply(remove_integers_from_row, axis=1)
+
+    # Propagate 'state' column.
+    state = None
+    for i, row in data.iterrows():
+      if pandas.notnull(row['state']):
+        state = row['state']
+      data.set_value(i, 'state', state)
+
+    return data
 
   @staticmethod
   def get_exact_matching_key():
     # By returning `None` as key, we use `index` as key.
-    return None
+    # return None
+    return 'index'
 
   @staticmethod
   def get_state_key():
-    return 'State'
+    return 'state'
 
   @staticmethod
   def get_city_key():
-    return 'City'
+    return 'city'
 
   @staticmethod
   def get_population_key():
-    return 'Population'
+    return 'population'
 
 
 class Census(DataTable):
@@ -214,11 +293,25 @@ class Census(DataTable):
     Returns:
       Pandas dataframe.
     """
-    return pandas.read_csv(file_path, encoding='ISO-8859-1')
+    # header=1 skips line 0 and uses line 1 as the header.
+    data = pandas.read_csv(file_path, encoding='ISO-8859-1', header=1)
+    # Parse out 'state' and 'city' field from 'Geography.2' field.  There's a
+    # '.2' because multiple fields in the header are called 'Geography'.  We
+    # should clean that up sometime.
+    if 'Geography.2' in data:
+
+      def parse_city_and_state(row):
+        city, state = row['Geography.2'].lower().split(', ')
+        city = city.rstrip(' city')
+        return pandas.Series([city, state])
+
+      data[['city', 'state']] = data.apply(parse_city_and_state, axis=1)
+
+    return data
 
   @staticmethod
   def get_exact_matching_key():
-    return 'GC_RANK.target-geo-id2'
+    return 'Target Geo Id2'
 
   @staticmethod
   def get_state_key():
