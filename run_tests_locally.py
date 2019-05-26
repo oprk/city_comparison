@@ -5,6 +5,7 @@ in the dev environment.
 """
 
 import subprocess
+# pylint: disable=E0401
 import yaml
 
 with open('.travis.yml', 'r') as filehandler:
