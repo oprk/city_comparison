@@ -133,7 +133,7 @@ class TestFbi(unittest.TestCase):
 class TestCensus(unittest.TestCase):
 
   def test_get_exact_matching_key(self):
-    self.assertEqual(jc.Census.get_exact_matching_key(), 'Target Geo Id')
+    self.assertEqual(jc.Census.get_exact_matching_key(), 'Target Geo Id2')
 
   def test_get_state_key(self):
     self.assertEqual(jc.Census.get_state_key(), 'state')
@@ -192,7 +192,7 @@ class TestCensus(unittest.TestCase):
             'foo': [1, 2],
             'state': ['CA', 'AL'],
             'city': ['Sunnyvale', 'Montgomery'],
-            'Target Geo Id': ['1620000US0677000', '1620000US0151000'],
+            'Target Geo Id2': ['1620000US0677000', '1620000US0151000'],
             'Population Estimate (as of July 1) - 2017': [100, 200],
         },
         index=[0, 1])
@@ -201,7 +201,7 @@ class TestCensus(unittest.TestCase):
             'bar': [3, 4],
             'state': ['AL', 'CA'],
             'city': ['Montgomery', 'Sunnyvale'],
-            'Target Geo Id': ['1620000US0151000', '1620000US0677000'],
+            'Target Geo Id2': ['1620000US0151000', '1620000US0677000'],
             'Population Estimate (as of July 1) - 2017': [200, 100],
         },
         index=[0, 1])
@@ -216,7 +216,7 @@ class TestCensus(unittest.TestCase):
         'state_table2': ['CA', 'AL'],
         'city_table1': ['Sunnyvale', 'Montgomery'],
         'city_table2': ['Sunnyvale', 'Montgomery'],
-        'Target Geo Id': ['1620000US0677000', '1620000US0151000'],
+        'Target Geo Id2': ['1620000US0677000', '1620000US0151000'],
         'Population Estimate (as of July 1) - 2017_table1': [100, 200],
         'Population Estimate (as of July 1) - 2017_table2': [100, 200],
     }).sort_index(axis=1)
@@ -246,7 +246,7 @@ class TestFuzzyMatching(unittest.TestCase):
             'bar': [5, 3, 4],
             'state': ['Isle of Man', 'AL', 'CA'],
             'city': ['Avalon', 'Montgomery', 'Sunnyvale'],
-            'Target Geo Id': ['???', '1620000US0151000', '1620000US0677000'],
+            'Target Geo Id2': ['???', '1620000US0151000', '1620000US0677000'],
             'Population Estimate (as of July 1) - 2017': [1, 200, 100],
         },
         index=[0, 1, 2])
@@ -262,7 +262,7 @@ class TestFuzzyMatching(unittest.TestCase):
         'Population': [200., 100., 300., 0.],
         'Population Estimate (as of July 1) - 2017': [200., 100., 0., 1.],
         'State': ['AL', 'CA', 'Hidden', 0],
-        'Target Geo Id': ['1620000US0151000', '1620000US0677000', 0, '???'],
+        'Target Geo Id2': ['1620000US0151000', '1620000US0677000', 0, '???'],
         'bar': [3., 4., 0., 5.],
         'foo': [2., 1., 3., 0.],
         'city': ['Montgomery', 'Sunnyvale', 0, 'Avalon'],

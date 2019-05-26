@@ -52,10 +52,11 @@ class DataTable(ABC):
 
   def join_exact_matching(self, data_table):
     """Join with another DataTable of the same type using exact matching."""
-    data = self._data.merge(data_table.data,
-                            on=self.__class__.get_exact_matching_key(),
-                            how='outer',
-                            suffixes=[self.suffix, data_table.suffix])
+    key = self.__class__.get_exact_matching_key()
+    data = self.data.merge(data_table.data,
+                           on=key,
+                           how='inner',
+                           suffixes=[self.suffix, data_table.suffix])
     return self.__class__(data)
 
   @staticmethod
@@ -150,11 +151,11 @@ class DataTable(ABC):
           data_table.get_fuzzy_matching_key(row_b.iloc[0]))
       if compare < 0:
         # row_a is too small to match row_b.
-        merged_result = merged_result.append(row_a, sort=True)
+        # merged_result = merged_result.append(row_a, sort=True)
         i_a += 1
       elif compare > 0:
         # row_b is too small to match row_a:
-        merged_result = merged_result.append(row_b, sort=True)
+        # merged_result = merged_result.append(row_b, sort=True)
         i_b += 1
       else:
         merge_rows = pandas.concat([row_a, row_b], axis=1, sort=True)
@@ -164,18 +165,18 @@ class DataTable(ABC):
         i_a += 1
         i_b += 1
 
-    # There may be some stragglers.
-    while i_a < len(rows_a):
-      row_a = rows_a[i_a:i_a + 1]
-      row_a.reset_index(inplace=True, drop=True)
-      merged_result = merged_result.append(row_a, sort=True)
-      i_a += 1
+    # # There may be some stragglers.
+    # while i_a < len(rows_a):
+    #   row_a = rows_a[i_a:i_a + 1]
+    #   row_a.reset_index(inplace=True, drop=True)
+    #   merged_result = merged_result.append(row_a, sort=True)
+    #   i_a += 1
 
-    while i_b < len(rows_b):
-      row_b = rows_b[i_b:i_b + 1]
-      row_b.reset_index(inplace=True, drop=True)
-      merged_result = merged_result.append(row_b, sort=True)
-      i_b += 1
+    # while i_b < len(rows_b):
+    #   row_b = rows_b[i_b:i_b + 1]
+    #   row_b.reset_index(inplace=True, drop=True)
+    #   merged_result = merged_result.append(row_b, sort=True)
+    #   i_b += 1
 
     # Drop the indices in `merged_result`, because they don't mean anything either.
     merged_result.reset_index(inplace=True, drop=True)
@@ -208,9 +209,20 @@ class Fbi(DataTable):
 
   @staticmethod
   def read(file_path):
+    # TODO: instead of reading JSON that was constructed from XLS, read XLS into
+    # Pandas directly.
     data = pandas.read_json(file_path, encoding='ISO-8859-1', orient='index')
     # Turn default index into a column named 'index'.
     data.reset_index(inplace=True)
+    # Parse out the `xls_dict_row`.
+    xls_dict_row_keys = list(data.iloc[0]['xls_dict_row'].keys())
+
+    def ordered_dict_values(row):
+      xls_dict = row['xls_dict_row']
+      return pandas.Series([xls_dict[key] for key in xls_dict_row_keys])
+
+    data[xls_dict_row_keys] = data.apply(ordered_dict_values, axis=1)
+
     return data
 
   @staticmethod
@@ -246,11 +258,22 @@ class Census(DataTable):
       Pandas dataframe.
     """
     # header=1 skips line 0 and uses line 1 as the header.
-    return pandas.read_csv(file_path, encoding='ISO-8859-1', header=1)
+    data = pandas.read_csv(file_path, encoding='ISO-8859-1', header=1)
+    # Parse out 'state' and 'city' field from 'Geography.2' field.  There's a
+    # '.2' because multiple fields in the header are called 'Geography'.  We
+    # should clean that up sometime.
+    if 'Geography.2' in data:
+
+      def parse_city_and_state(row):
+        return pandas.Series(row['Geography.2'].lower().split(', '))
+
+      data[['city', 'state']] = data.apply(parse_city_and_state, axis=1)
+
+    return data
 
   @staticmethod
   def get_exact_matching_key():
-    return 'Target Geo Id'
+    return 'Target Geo Id2'
 
   @staticmethod
   def get_state_key():
