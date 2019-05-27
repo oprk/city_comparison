@@ -12,4 +12,4 @@ script:
   - yapf --parallel --verbose --recursive --style .style.yapf --exclude 'py37-mac' --diff .
   - pylint --max-line-length=120 *.py
   - python join_cities_csv.py
-  - python -m pytest tests
+  - python -m pytest --color=yes tests

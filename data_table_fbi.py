@@ -31,8 +31,8 @@ class Fbi(DataTable):
 
     def remove_integers_from_row(row):
       return pandas.Series(
-          [remove_integers(row['city']),
-           remove_integers(row['state'])])
+        [remove_integers(row['city']),
+         remove_integers(row['state'])])
 
     data[['city', 'state']] = data.apply(remove_integers_from_row, axis=1)
 
