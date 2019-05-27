@@ -112,11 +112,11 @@ class DataTable(ABC):
       # Might be the same city.
       # Sanity check that populations are within 5% of each other.
       population_percentage_difference = round(
-          abs(key1.population - key2.population) / key2.population * 100)
+        abs(key1.population - key2.population) / key2.population * 100)
       if population_percentage_difference > 10:
         print(
-            'Population too different ({percent}%) to be the same city, continue:'
-            .format(percent=population_percentage_difference), key1, key2)
+          'Population too different ({percent}%) to be the same city, continue:'
+          .format(percent=population_percentage_difference), key1, key2)
         # Probably just a coincidence that the cities begin with the same name,
         # if the populations are off by that much.
         if key1.city < key2.city:
@@ -144,14 +144,14 @@ class DataTable(ABC):
     """
     # pylint: disable=too-many-locals
     keys_a = [
-        self.get_state_key(),
-        self.get_city_key(),
-        self.get_population_key()
+      self.get_state_key(),
+      self.get_city_key(),
+      self.get_population_key()
     ]
     keys_b = [
-        data_table.get_state_key(),
-        data_table.get_city_key(),
-        data_table.get_population_key()
+      data_table.get_state_key(),
+      data_table.get_city_key(),
+      data_table.get_population_key()
     ]
     rows_a = self._data.sort_values(by=keys_a)
     rows_b = data_table.data.sort_values(by=keys_b)

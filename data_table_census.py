@@ -3,6 +3,7 @@ Module for parsing any Census related data in data/census.
 """
 import pandas
 from data_table import DataTable
+from headers_cleanup import HEADERS_CHANGE
 
 
 class Census(DataTable):
@@ -48,4 +49,5 @@ class Census(DataTable):
 
   @staticmethod
   def get_population_key():
-    return 'Population Estimate (as of July 1) - 2017'
+    return HEADERS_CHANGE['census_2017']['rename_columns'][
+      'Population Estimate (as of July 1) - 2017']

@@ -22,7 +22,9 @@ for test_command in TEST_COMMANDS:
     subprocess.check_output(test_command, shell=True)
   except subprocess.CalledProcessError as process_error:
     print(test_command)
-    print(process_error.output)
+    print(process_error.output.decode())
+    EXIT_ERRORS = True
+    print('')
 
 if EXIT_ERRORS:
   exit(1)
